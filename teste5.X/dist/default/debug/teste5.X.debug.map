@@ -7,7 +7,7 @@ Command:
   -p33FJ32MC202 \
   --mdfp=/opt/microchip/mplabx/v5.30/packs/Microchip/dsPIC33F-GP-MC_DFP/1.1.15/xc16 \
   -o \
-  dist/default/production/teste5.X.production.cof \
+  dist/default/debug/teste5.X.debug.cof \
   -L/opt/microchip/xc16/v1.50/bin/bin/.. \
   -L/opt/microchip/mplabx/v5.30/packs/Microchip/dsPIC33F-GP-MC_DFP/1.1.15/xc16/bin/../support/PIC24H/gld \
   -L/opt/microchip/mplabx/v5.30/packs/Microchip/dsPIC33F-GP-MC_DFP/1.1.15/xc16/bin/../support/dsPIC33F/gld \
@@ -19,8 +19,11 @@ Command:
   -L/opt/microchip/xc16/v1.50/bin/bin/../../support/dsPIC33C/gld \
   -L/opt/microchip/xc16/v1.50/bin/bin/../../support/dsPIC33E/gld \
   -L/opt/microchip/xc16/v1.50/bin/bin/../../support/dsPIC33F/gld \
-  build/default/production/main.o \
+  build/default/debug/main.o \
   --defsym=__MPLAB_BUILD=1 \
+  --defsym=__MPLAB_DEBUG=1 \
+  --defsym=__DEBUG=1 \
+  --defsym=__MPLAB_DEBUGGER_SIMULATOR=1 \
   -Tp33FJ32MC202.gld.00 \
   --stack=16 \
   --check-sections \
@@ -33,10 +36,10 @@ Command:
   --stackguard=16 \
   --no-force-link \
   --smart-io \
-  -Map=dist/default/production/teste5.X.production.map \
+  -Map=dist/default/debug/teste5.X.debug.map \
   --report-mem \
   --memorysummary \
-  dist/default/production/memoryfile.xml \
+  dist/default/debug/memoryfile.xml \
   -start-group \
   --library=lega-pic30-coff \
   --library=m-coff \
@@ -50,11 +53,11 @@ Archive member included because of file (symbol)
 /opt/microchip/xc16/v1.50/bin/bin/../../lib/liblega-pic30-coff.a(crt0_standard.o)
                               (_resetPRI)
 /opt/microchip/xc16/v1.50/bin/bin/../../lib/liblega-pic30-coff.a(delay32.Lo)
-                              build/default/production/main.o (__delay32)
+                              build/default/debug/main.o (__delay32)
 /opt/microchip/xc16/v1.50/bin/bin/../../lib/liblega-pic30-coff.a(data_init_standard.o)
                               /opt/microchip/xc16/v1.50/bin/bin/../../lib/liblega-pic30-coff.a(crt0_standard.o) (_data_init_standard)
 /opt/microchip/xc16/v1.50/bin/bin/../../lib/liblega-c-coff.a(strcmp.XX_o)
-                              build/default/production/main.o (strcmp)
+                              build/default/debug/main.o (strcmp)
 
 
 Selected CodeGuard Options:
@@ -189,8 +192,11 @@ FUID3            0xf80016           0x000002
 
 Mapa de mem√≥ria e script de vinculador
 
-LOAD build/default/production/main.o
+LOAD build/default/debug/main.o
                     0x0001                  __MPLAB_BUILD = 0x1
+                    0x0001                  __MPLAB_DEBUG = 0x1
+                    0x0001                  __DEBUG = 0x1
+                    0x0001                  __MPLAB_DEBUGGER_SIMULATOR = 0x1
 LOAD p33FJ32MC202
 LOAD /opt/microchip/xc16/v1.50/bin/bin/../../lib/libfx-coff.a
                     0xf80000                  __FBS = 0xf80000
@@ -233,7 +239,7 @@ LOAD /opt/microchip/xc16/v1.50/bin/bin/../../lib/libfx-coff.a
  *(.user_init)
  *(.handle)
  *(.isr*)
- .isr.text        0x0002d8         0x9c build/default/production/main.o
+ .isr.text        0x0002d8         0x9c build/default/debug/main.o
                   0x0002d8                  _INT0Interrupt
                   0x000314                  _INT1Interrupt
                   0x000344                  _INT2Interrupt
@@ -251,12 +257,12 @@ usercode
 
 __FBS             0xf80000          0x2
  *(__FBS.sec*)
- __FBS.sec        0xf80000          0x2 /CW/_FBS‡‹Å
+ __FBS.sec        0xf80000          0x2 /CW/_FBS∞.∑
                   0xf80000                  _FBS.sec
 
 __FGS             0xf80004          0x2
  *(__FGS.sec*)
- __FGS.sec        0xf80004          0x2 /CW/_FGS
+ __FGS.sec        0xf80004          0x2 /CW/_FGS–∑
                   0xf80004                  _FGS.sec
 
 __FOSCSEL
@@ -952,16 +958,16 @@ LOAD /opt/microchip/xc16/v1.50/bin/bin/../../lib/liblega-pic30-coff.a
 LOAD /opt/microchip/xc16/v1.50/bin/bin/../../lib/libm-coff.a
 LOAD /opt/microchip/xc16/v1.50/bin/bin/../../lib/liblega-c-coff.a
 END GROUP
-OUTPUT(dist/default/production/teste5.X.production.cof coff-pic30)
-LOAD /CW/_FGS
-LOAD /CW/_FBS‡‹Å
+OUTPUT(dist/default/debug/teste5.X.debug.cof coff-pic30)
+LOAD /CW/_FGS–∑
+LOAD /CW/_FBS∞.∑
 LOAD data_init
 LOAD default_isr
 
 __c30_signature
                   0x000000         0x1e
  __c30_signature
-                  0x000000          0x6 build/default/production/main.o
+                  0x000000          0x6 build/default/debug/main.o
  __c30_signature
                   0x000006          0x6 /opt/microchip/xc16/v1.50/bin/bin/../../lib/liblega-pic30-coff.a(crt0_standard.o)
  __c30_signature
@@ -972,47 +978,47 @@ __c30_signature
                   0x000018          0x6 /opt/microchip/xc16/v1.50/bin/bin/../../lib/liblega-c-coff.a(strcmp.XX_o)
 
 .nbss               0x0800          0x2
- .nbss              0x0800          0x2 build/default/production/main.o
+ .nbss              0x0800          0x2 build/default/debug/main.o
                     0x0800                  pulse
 
 .config_JTAGEN    0xf8000e          0x2
  .config_JTAGEN
-                  0xf8000e          0x2 build/default/production/main.o
+                  0xf8000e          0x2 build/default/debug/main.o
 
 .config_PWMPIN    0xf8000c          0x2
  .config_PWMPIN
-                  0xf8000c          0x2 build/default/production/main.o
+                  0xf8000c          0x2 build/default/debug/main.o
 
 .config_FWDTEN    0xf8000a          0x2
  .config_FWDTEN
-                  0xf8000a          0x2 build/default/production/main.o
+                  0xf8000a          0x2 build/default/debug/main.o
 
 .config_FCKSM     0xf80008          0x2
- .config_FCKSM    0xf80008          0x2 build/default/production/main.o
+ .config_FCKSM    0xf80008          0x2 build/default/debug/main.o
 
 .config_IESO      0xf80006          0x2
- .config_IESO     0xf80006          0x2 build/default/production/main.o
+ .config_IESO     0xf80006          0x2 build/default/debug/main.o
 
 .ivt._INT0Interrupt
                   0x000014          0x2
  .ivt._INT0Interrupt
-                  0x000014          0x2 build/default/production/main.o
+                  0x000014          0x2 build/default/debug/main.o
 
 .ivt._INT1Interrupt
                   0x00003c          0x2
  .ivt._INT1Interrupt
-                  0x00003c          0x2 build/default/production/main.o
+                  0x00003c          0x2 build/default/debug/main.o
 
 .ivt._INT2Interrupt
                   0x00004e          0x2
  .ivt._INT2Interrupt
-                  0x00004e          0x2 build/default/production/main.o
+                  0x00004e          0x2 build/default/debug/main.o
 
 .const              0x8398         0x16 carga com endere√ßo 0x000398  
- .const             0x8398         0x16 build/default/production/main.o
+ .const             0x8398         0x16 build/default/debug/main.o
 
 .text             0x0003ae        0x118
- .text            0x0003ae        0x118 build/default/production/main.o
+ .text            0x0003ae        0x118 build/default/debug/main.o
                   0x0003ae                  PWM1
                   0x0003d6                  PWM2
                   0x0003fe                  PWM
