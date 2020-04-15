@@ -4,7 +4,7 @@
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
             <name>bebionic_firmware</name>
-            <creation-uuid>27c4f12d-1f41-4e95-a75d-58057d84e23e</creation-uuid>
+            <creation-uuid>b841f639-b20b-4370-8d13-c4b2ab65d99a</creation-uuid>
             <make-project-type>0</make-project-type>
             <c-extensions>c</c-extensions>
             <cpp-extensions/>
