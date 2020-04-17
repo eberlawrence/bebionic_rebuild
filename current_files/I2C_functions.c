@@ -1,5 +1,5 @@
 #include "I2C_functions.h"
-
+#include <xc.h>
 
 void I2CInit(void)
 {
