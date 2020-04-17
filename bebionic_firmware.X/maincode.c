@@ -47,9 +47,16 @@
 // #pragma config statements should precede project file includes.
 // Use project enums instead of #define for ON and OFF.
 
+
+
+
+
 #define FOSC 7370000LL
 #define FCY (FOSC/2)
 #define S1 PORTBbits.RB8
+
+#define EEPROMaddr 80
+#define EEPROMbaud 23
 
 #include <xc.h>
 #include <libpic30.h>
@@ -60,33 +67,75 @@
 int pulse = 0;
 int task = 0;
 
-
-void PWM1(int speed){
-    TRISBbits.TRISB12 = 0;
-    TRISBbits.TRISB14 = 0;
-    PORTBbits.RB12 = 0;
-    PORTBbits.RB14 = 0;
-    P1TCON = 0x0002;
-    P1TMR = 0;
-    P1TPER = 0x0731;
-    PWM1CON1 = 0x0010;
-    P1DTCON1 = 0x003B;
-    P1DC1 = speed;
-    P1TCONbits.PTEN = 1;
+void I2CInit(void)
+{
+    I2C1BRG = EEPROMbaud;           // @400kHz; (FCY/FSCL - FCY/1e7) - 1
+    I2C1CONbits.I2CEN = 0;  // Disable I2C
+    I2C1CONbits.DISSLW = 1; // Disable slew rate control
+    I2C1CONbits.A10M = 0;   // 7-bit slave addr
+    I2C1CONbits.SCLREL = 1; // SCL release control
+    I2C1CONbits.I2CEN = 1;  // Enable I2C
+    IEC1bits.MI2C1IE = 0;   // Master I2C interrupt
+    IFS1bits.MI2C1IF = 0;   // MI2C Flag
 }
-
-void PWM2(int speed){
-    TRISBbits.TRISB12 = 0;
-    TRISBbits.TRISB14 = 0;
-    PORTBbits.RB12 = 0;
-    PORTBbits.RB14 = 0;
-    P1TCON = 0x0002;
-    P1TMR = 0;
-    P1TPER = 0x0731;
-    PWM1CON1 = 0x0020;
-    P1DTCON1 = 0x003B;
-    P1DC2 = speed;
-    P1TCONbits.PTEN = 1;
+ 
+void I2CAck(void)
+{
+    I2C1CONbits.ACKDT = 0;      // Send ACK
+    I2C1CONbits.ACKEN = 1;      // Initiate Acknowledge and transmit ACKDT
+    while(I2CCONbits.ACKEN);
+}
+ 
+void I2CNack(void)
+{
+    I2C1CONbits.ACKDT = 1;      // Send NACK
+    I2C1CONbits.ACKEN = 1;      // Initiate Acknowledge and transmit ACKDT
+    while(I2CCONbits.ACKEN);  
+}
+ 
+void I2CStop(void)
+{
+    I2C1CONbits.RCEN = 0;       // receive mode not in progress
+    I2C1CONbits.PEN = 1;        // Stop condition
+    while(I2C1CONbits.PEN);
+}
+ 
+void I2CStart(void)
+{
+    I2C1CONbits.ACKDT = 0;      // Reset any ACK
+    I2C1CONbits.SEN = 1;        // Start
+    while(I2C1CONbits.SEN);
+}
+ 
+void I2CRestart(void)
+{
+    I2C1CONbits.RSEN = 1;       // Repeated Start Condition
+    while(I2C1CONbits.RSEN);
+    I2C1CONbits.ACKDT = 0;      // Send ACK
+    I2C1STATbits.TBF = 0;       // I2C1TRN is empty
+}
+ 
+void I2CWaitACK(void)
+{
+    while(I2C1STATbits.ACKSTAT);
+}
+ 
+void I2CIdle(void)
+{
+    while(I2CSTATbits.TRSTAT);
+}
+ 
+void I2CWrite(unsigned char c)
+{
+    I2C1TRN = c;
+    while(I2C1STATbits.TBF);
+}
+ 
+void I2CRead(void)
+{
+    I2CCONbits.RCEN = 1;
+    Nop();
+    while(!I2CSTATbits.RBF);
 }
 
 void PWM(int speed, char direction[10]){
@@ -130,7 +179,7 @@ void Interrupt0_Init( void )
 
 void Interrupt1_Init( void )
 {
-    RPINR0bits.INT1R = 8; // Define the pin number, according to RPx
+    RPINR0bits.INT1R = 5; // Define the pin number, according to RPx
     INTCON2bits.INT1EP = 0; // External interrupt edge detect polarity
     IEC1bits.INT1IE = 1; // 
     IPC5bits.INT1IP = 1; 
@@ -138,7 +187,7 @@ void Interrupt1_Init( void )
 
 void Interrupt2_Init( void )
 {
-    RPINR1bits.INT2R = 8; // Define the pin number, according to RPx
+    RPINR1bits.INT2R = 5; // Define the pin number, according to RPx
     INTCON2bits.INT2EP = 1; // External interrupt edge detect polarity
     IEC1bits.INT2IE = 1; // 
     IPC7bits.INT2IP = 1; 
@@ -177,12 +226,14 @@ void __attribute__((interrupt, auto_psv)) _INT2Interrupt( void )
 
 
 int main(void) {
+    I2CInit();
+    I2CStart();
     Interrupt0_Init();
     Interrupt1_Init();
     Interrupt2_Init();
     TRISBbits.TRISB2 =   0;
     TRISBbits.TRISB3 =   0;
-    TRISBbits.TRISB8 =   1; 
+    TRISBbits.TRISB5 =   1; 
     TRISBbits.TRISB13 =  0; 
     PORTBbits.RB13 =     1;
     
@@ -202,3 +253,5 @@ int main(void) {
     }
     return 0;
 }
+
+
