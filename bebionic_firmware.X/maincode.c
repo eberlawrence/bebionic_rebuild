@@ -62,6 +62,8 @@
 #include <libpic30.h>
 #include <string.h>
 #include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
 
 
 int pulse = 0;
@@ -138,28 +140,37 @@ void I2CRead(void)
     while(!I2CSTATbits.RBF);
 }
 
-void PWM(int speed, char direction[10]){
+
+void PWM(unsigned int speed, char direction[10]){
+    unsigned int x, y;
     TRISBbits.TRISB12 = 0;
     TRISBbits.TRISB14 = 0;
     PORTBbits.RB12 = 0;
     PORTBbits.RB14 = 0;
     P1TCON = 0x0002;
     P1TMR = 0;
-    P1TPER = 0x0731;
+    P1TPER = 0xFFFF;
     P1DTCON1 = 0x003B;
+
+    
+    x = (100*speed)/50;
+    y = (P1TPER / 100) * x;
+
+    
+    
     if (strcmp(direction, "forward") == 0){
         PWM1CON1 = 0x0010;
-        P1DC1 = speed;
+        P1DC1 = y;
     }
     else if (strcmp(direction, "backward") == 0)
     {
         PWM1CON1 = 0x0020;
-        P1DC2 = speed;
+        P1DC2 = y;
     }
     else if (strcmp(direction, "stop") == 0){
         PWM1CON1 = 0x0030;
-        P1DC1 = speed;
-        P1DC2 = speed;
+        P1DC1 = y;
+        P1DC2 = y;
     }
     else {
         PWM1CON1 = 0x0000;
@@ -168,6 +179,8 @@ void PWM(int speed, char direction[10]){
     
     P1TCONbits.PTEN = 1;
 }
+
+
 
 
 void Interrupt0_Init( void )
@@ -211,6 +224,8 @@ void __attribute__((interrupt, auto_psv)) _INT0Interrupt( void )
     IFS0bits.INT0IF = 0;
 }
 
+
+
 void __attribute__((interrupt, auto_psv)) _INT1Interrupt( void )               
 {   
     task = 1;
@@ -226,8 +241,6 @@ void __attribute__((interrupt, auto_psv)) _INT2Interrupt( void )
 
 
 int main(void) {
-    I2CInit();
-    I2CStart();
     Interrupt0_Init();
     Interrupt1_Init();
     Interrupt2_Init();
@@ -239,14 +252,13 @@ int main(void) {
     
     
     
-    
     while(1){
         if (task == 1){
-            PWM(1000, "forward");
+            PWM(50, "forward");
             task = 0;
         }
         if (task == 2){
-            PWM(1000, "stop");
+            PWM(100, "stop");
             task = 0;
         }
         

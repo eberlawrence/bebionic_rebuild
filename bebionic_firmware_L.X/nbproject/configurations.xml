@@ -4,8 +4,6 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>eepromI2C.h</itemPath>
-      <itemPath>newfile.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -14,14 +12,18 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>../bebionic_firmware.X/maincode.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
                    projectFiles="false">
       <itemPath>Makefile</itemPath>
     </logicalFolder>
-    <itemPath>maincode.c</itemPath>
   </logicalFolder>
+  <sourceRootList>
+    <Elem>../old_files</Elem>
+    <Elem>../bebionic_firmware.X</Elem>
+  </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="default" type="2">
@@ -30,13 +32,13 @@
         <targetDevice>dsPIC33FJ32MC202</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool></platformTool>
+        <platformTool>Simulator</platformTool>
         <languageToolchain>XC16</languageToolchain>
         <languageToolchainVersion>1.50</languageToolchainVersion>
         <platform>2</platform>
       </toolsSet>
       <packs>
-        <pack name="dsPIC33F-GP-MC_DFP" vendor="Microchip" version="1.2.35"/>
+        <pack name="dsPIC33F-GP-MC_DFP" vendor="Microchip" version="1.1.15"/>
       </packs>
       <compileType>
         <linkerTool>
@@ -77,8 +79,7 @@
         <property key="enable-short-double" value="false"/>
         <property key="enable-symbols" value="true"/>
         <property key="enable-unroll-loops" value="false"/>
-        <property key="extra-include-directories"
-                  value="..\..\..\..\..\Program Files (x86)\Microchip\xc16\v1.50\support\dsPIC33F\h"/>
+        <property key="extra-include-directories" value=""/>
         <property key="isolate-each-function" value="false"/>
         <property key="keep-inline" value="false"/>
         <property key="oXC16gcc-align-arr" value="false"/>
@@ -182,7 +183,6 @@
         <property key="legacy-libc" value="true"/>
         <property key="mpreserve-all" value="false"/>
         <property key="oXC16glb-macros" value=""/>
-        <property key="omit-pack-options" value="1"/>
         <property key="output-file-format" value="coff"/>
         <property key="preserve-all" value="false"/>
         <property key="preserve-file" value=""/>

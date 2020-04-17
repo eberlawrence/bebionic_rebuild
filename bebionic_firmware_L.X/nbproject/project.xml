@@ -3,16 +3,19 @@
     <type>com.microchip.mplab.nbide.embedded.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>bebionic_firmware</name>
-            <creation-uuid>27c4f12d-1f41-4e95-a75d-58057d84e23e</creation-uuid>
+            <name>bebionic_firmware_L</name>
+            <creation-uuid>4f1217fd-94ad-4dee-9065-2be388bff25d</creation-uuid>
             <make-project-type>0</make-project-type>
             <c-extensions>c</c-extensions>
             <cpp-extensions/>
-            <header-extensions>h</header-extensions>
+            <header-extensions/>
             <asminc-extensions/>
             <sourceEncoding>ISO-8859-1</sourceEncoding>
             <make-dep-projects/>
-            <sourceRootList/>
+            <sourceRootList>
+                <sourceRootElem>../old_files</sourceRootElem>
+                <sourceRootElem>../bebionic_firmware.X</sourceRootElem>
+            </sourceRootList>
             <confList>
                 <confElem>
                     <name>default</name>
