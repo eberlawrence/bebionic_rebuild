@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project>
+  <executable name="dist/default/debug/bebionic_master.X.debug.cof">
+    <memory name="data">
+      <units>bytes</units>
+      <length>2048</length>
+      <used>2</used>
+      <free>2046</free>
+    </memory>
+    <memory name="program">
+      <units>bytes</units>
+      <length>33024</length>
+      <used>975</used>
+      <free>32049</free>
+    </memory>
+  </executable>
+</project>

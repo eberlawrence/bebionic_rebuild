@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=bebionic_firmware.X
+PROJECTNAME=bebionic_slave.X
 
 # Active Configuration
 DEFAULTCONF=default

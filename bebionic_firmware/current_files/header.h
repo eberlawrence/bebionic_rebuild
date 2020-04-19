@@ -55,7 +55,7 @@ extern "C" {
 // Use project enums instead of #define for ON and OFF.
 
 
-#include <xc.h>
+#include <p33FJ32MC202.h>
 #include <libpic30.h>
 
 

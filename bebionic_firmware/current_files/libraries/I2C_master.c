@@ -1,18 +1,19 @@
-#include "I2C_functions.h"
-#include <xc.h>
 
-void I2CInit(void)
-{
-    I2C1BRG = EEPROMbaud;           // @400kHz; (FCY/FSCL - FCY/1e7) - 1
-    I2C1CONbits.I2CEN = 0;  // Disable I2C
-    I2C1CONbits.DISSLW = 1; // Disable slew rate control
-    I2C1CONbits.A10M = 0;   // 7-bit slave addr
-    I2C1CONbits.SCLREL = 1; // SCL release control
-    I2C1CONbits.I2CEN = 1;  // Enable I2C
-    IEC1bits.MI2C1IE = 0;   // Master I2C interrupt
+#include <p33FJ32MC202.h>
+#include "I2C_master.h"
+
+void I2C_init(void)
+{   
+    I2C1BRG = EEPROMbaud;   // @400kHz; (FCY/FSCL - FCY/1e7) - 1
+    I2C1CON = 0x8000;
+    IEC1bits.MI2C1IE = 1;   // Master I2C interrupt
+}
+
+void __attribute__((interrupt, no_auto_psv)) _MI2C1Interrupt(void)
+{    
     IFS1bits.MI2C1IF = 0;   // MI2C Flag
 }
- 
+
 void I2CAck(void)
 {
     I2C1CONbits.ACKDT = 0;      // Send ACK
@@ -68,25 +69,19 @@ void I2CWrite(unsigned char c)
 void I2CRead(void)
 {
     I2CCONbits.RCEN = 1;
-    Nop();
+    //Nop();
     while(!I2CSTATbits.RBF);
 }
 
-void I2CWriteReg(char addr, char byteHigh, char byteLow, char value)
+void I2CWriteReg(char addr, char v)
 {
     // Start Condition
     I2CStart();
     // EEPROM Addr
     I2CWrite((addr<<1)&0xFE);
     I2CIdle();
-    // Addr High Byte
-    I2CWrite(byteHigh);
-    I2CIdle();
-    // Addr Low Byte
-    I2CWrite(byteLow);
-    I2CIdle();
     // Value
-    I2CWrite(value);
+    I2CWrite(v);
     I2CIdle();
     // Stop
     I2CStop();
@@ -117,56 +112,4 @@ char I2CReadReg(char addr, char byteHigh, char byteLow)
     temp = I2C1RCV;
     return temp;
 }
- 
-void I2CSequentialWriteReg(char addr, char byteHigh, char byteLow, char* value, int length)
-{
-    int j;
-    // Start Condition
-    I2CStart();
-    // EEPROM Addr
-    I2CWrite((addr<<1)&0xFE);
-    I2CIdle();
-    // Addr High Byte
-    I2CWrite(byteHigh);
-    I2CIdle();
-    // Addr Low Byte
-    I2CWrite(byteLow);
-    I2CIdle();
-    // Value
-    for(j = 0; j < length; j++)
-    {
-        I2CWrite(value[j]);
-        I2CIdle();
-    }
-    // Stop
-    I2CStop();    
-}
- 
-void I2CSequentialReadReg(char addr, char byteHigh, char byteLow, char* buff, int length)
-{
-    int j;
-    // Start Condition
-    I2CStart();
-    // EEPROM Addr
-    I2CWrite((addr<<1)&0xFE);
-    I2CIdle();
-    // Addr High Byte
-    I2CWrite(byteHigh);
-    I2CIdle();
-    // Addr Low Byte
-    I2CWrite(byteLow);
-    I2CIdle();
-    // Restart
-    I2CRestart();
-    I2CWrite((addr<<1)|0x01);
-    I2CIdle();  
-    for(j = 0; j < length; j++)
-    {
-        I2CRead();
-        buff[j] = I2C1RCV;  
-        I2CAck();
-    }
-    buff[j] = '\0';
-    I2CNack();
-    I2CStop();  
-}
+

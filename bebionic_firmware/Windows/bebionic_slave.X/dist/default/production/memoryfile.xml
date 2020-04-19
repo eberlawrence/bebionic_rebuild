@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project>
-  <executable name="dist/default/production/bebionic_firmware.X.production.cof">
+  <executable name="dist/default/production/bebionic_slave.X.production.cof">
     <memory name="data">
       <units>bytes</units>
       <length>2048</length>
-      <used>4</used>
-      <free>2044</free>
+      <used>8</used>
+      <free>2040</free>
     </memory>
     <memory name="program">
       <units>bytes</units>
       <length>33024</length>
-      <used>1686</used>
-      <free>31338</free>
+      <used>972</used>
+      <free>32052</free>
     </memory>
   </executable>
 </project>
