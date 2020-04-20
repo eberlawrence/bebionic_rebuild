@@ -1,7 +1,6 @@
-
 /* 
- * File:   main_header.h
- * Author: Eber
+ * File:   I2C_slave.h
+ * Author: Eber Lawrence
  *
  * Created on 18 de Abril de 2020, 19:50
  */
@@ -13,14 +12,12 @@
 extern "C" {
 #endif
 
-
-#define USE_I2C_Clock_Stretch	//uncomment this line if you want clock stretching featue
-								//to be enabled
-//Functions prototype
-void I2C_init(void);
-void __attribute__((interrupt,no_auto_psv)) _SI2C1Interrupt(void);
-
-extern unsigned int value;	//RAM area which will work as EEPROM for Master I2C device
+#ifndef FOSC
+#define FOSC 7370000LL
+#define FCY (FOSC/2)
+#endif
+    
+extern unsigned int value;	
 extern unsigned int angle;
 
 struct FlagType
@@ -29,6 +26,11 @@ struct FlagType
 	unsigned char DataFlag:1;
 };
 extern struct FlagType Flag;
+
+void i2c_Init(uint8_t address);
+void __attribute__((interrupt,no_auto_psv)) _SI2C1Interrupt(void);
+
+
 
 
 #ifdef	__cplusplus

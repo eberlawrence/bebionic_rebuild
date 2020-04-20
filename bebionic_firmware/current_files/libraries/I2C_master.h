@@ -11,33 +11,21 @@
 #ifdef	__cplusplus
 extern "C" {
 #endif
-
-#define EEPROMaddr 80
-#define EEPROMbaud 23
-
-extern void I2C_init(void);
- 
-extern void I2CAck(void);
- 
-extern void I2CNack(void);
- 
-extern void I2CStop(void);
- 
-extern void I2CStart(void);
- 
-extern void I2CRestart(void);
- 
-extern void I2CWaitACK(void);
- 
-extern void I2CIdle(void);
-
-extern void I2CWrite(unsigned char c);
-
-extern void I2CRead(void);
-
-extern void I2CWriteReg(char addr, char v);
-
-extern char I2CReadReg(char addr, char byteHigh, char byteLow);
+      
+#ifndef FOSC
+#define FOSC 7370000LL
+#define FCY (FOSC/2)
+#endif
+    
+void i2c_Init(uint32_t FSCL);
+void i2c_Ack(void); 
+void i2c_Nack(void);
+void i2c_WaitACK(void);
+void i2c_Idle(void);
+void i2c_Start(void);
+void i2c_Restart(void);
+void i2c_Stop(void);
+void i2c_Write(uint8_t data);
 
 #ifdef	__cplusplus
 }

@@ -21,6 +21,7 @@ Command:
   -Lc:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../support/dsPIC33F/gld \
   build/default/production/_ext/725218671/main_slave.o \
   build/default/production/_ext/1673019547/I2C_slave.o \
+  build/default/production/_ext/1673019547/pwm_generator.o \
   --defsym=__MPLAB_BUILD=1 \
   -Tp33FJ32MC202.gld.00 \
   --stack=16 \
@@ -50,10 +51,12 @@ Archive member included because of file (symbol)
 
 c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\liblega-pic30-coff.a(crt0_standard.o)
                               (_resetPRI)
+c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\liblega-pic30-coff.a(delay32.Lo)
+                              build/default/production/_ext/725218671/main_slave.o (__delay32)
 c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\liblega-pic30-coff.a(data_init_standard.o)
                               c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\liblega-pic30-coff.a(crt0_standard.o) (_data_init_standard)
 c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\liblega-c-coff.a(strcmp.XX_o)
-                              build/default/production/_ext/725218671/main_slave.o (strcmp)
+                              build/default/production/_ext/1673019547/pwm_generator.o (strcmp)
 
 
 Selected CodeGuard Options:
@@ -83,12 +86,12 @@ Default Scalar Model: Small
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
-.text                        0x200               0x1a2           0x273  (627)
-.const                       0x3a2                0x16            0x21  (33)
-.text                        0x3b8                0xc2           0x123  (291)
-.dinit                       0x47a                 0xe            0x15  (21)
+.text                        0x200               0x1b8           0x294  (660)
+.const                       0x3b8                0x16            0x21  (33)
+.text                        0x3ce                0xe2           0x153  (339)
+.dinit                       0x4b0                 0xe            0x15  (21)
 
-                 Total "program" memory used (bytes):          0x3cc  (972) 2%
+                 Total "program" memory used (bytes):          0x41d  (1053) 3%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x800]
@@ -114,51 +117,53 @@ Info: Project is using a large data memory model when small data memory model is
 
 External Symbols in Data Memory (by address):
 
-                    0x0800                  _value
-                    0x0802                  _angle
-                    0x0804                  _Flag
+                    0x0800                  _Flag
+                    0x0802                  _value
+                    0x0804                  _angle
                     0x0806                  _pulse
 
 External Symbols in Data Memory (by name):
 
-                    0x0804                  _Flag
-                    0x0802                  _angle
+                    0x0800                  _Flag
+                    0x0804                  _angle
                     0x0806                  _pulse
-                    0x0800                  _value
+                    0x0802                  _value
 
 External Symbols in Program Memory (by address):
 
                   0x000200                  __resetPRI
                   0x000230                  __psv_init
-                  0x000246                  __data_init_standard
-                  0x000246                  __data_init
-                  0x0002bc                  __INT0Interrupt
-                  0x0002f8                  __SI2C1Interrupt
-                  0x00037e                  __DefaultInterrupt
-                  0x000382                  _strcmp
-                  0x0003b8                  _PWM
-                  0x000444                  _Interrupt0_Init
-                  0x000454                  _main
-                  0x000464                  _I2C_init
+                  0x000240                  ___delay32
+                  0x000262                  __data_init
+                  0x000262                  __data_init_standard
+                  0x0002d8                  __INT0Interrupt
+                  0x000314                  __SI2C1Interrupt
+                  0x000394                  __DefaultInterrupt
+                  0x000398                  _strcmp
+                  0x0003ce                  _PWM
+                  0x00045a                  _Interrupt0_Init
+                  0x00046a                  _main
+                  0x00049a                  _i2c_Init
                   0xf80000                  __FBS.sec
                   0xf80004                  __FGS.sec
 
 External Symbols in Program Memory (by name):
 
-                  0x000464                  _I2C_init
-                  0x000444                  _Interrupt0_Init
-                  0x0003b8                  _PWM
-                  0x00037e                  __DefaultInterrupt
+                  0x00045a                  _Interrupt0_Init
+                  0x0003ce                  _PWM
+                  0x000394                  __DefaultInterrupt
                   0xf80000                  __FBS.sec
                   0xf80004                  __FGS.sec
-                  0x0002bc                  __INT0Interrupt
-                  0x0002f8                  __SI2C1Interrupt
-                  0x000246                  __data_init
-                  0x000246                  __data_init_standard
+                  0x0002d8                  __INT0Interrupt
+                  0x000314                  __SI2C1Interrupt
+                  0x000240                  ___delay32
+                  0x000262                  __data_init
+                  0x000262                  __data_init_standard
                   0x000230                  __psv_init
                   0x000200                  __resetPRI
-                  0x000454                  _main
-                  0x000382                  _strcmp
+                  0x00049a                  _i2c_Init
+                  0x00046a                  _main
+                  0x000398                  _strcmp
 
 Memory Configuration
 
@@ -186,6 +191,7 @@ Linker script and memory map
 
 LOAD build/default/production/_ext/725218671/main_slave.o
 LOAD build/default/production/_ext/1673019547/I2C_slave.o
+LOAD build/default/production/_ext/1673019547/pwm_generator.o
                     0x0001                  __MPLAB_BUILD = 0x1
 LOAD p33FJ32MC202
 LOAD c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\libfx-coff.a
@@ -215,27 +221,29 @@ LOAD c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\libfx-coff.a
                   0x000002          0x2 SHORT 0x0 ((ABSOLUTE (__reset) >> 0x10) & 0x7f)
                   0x000003          0x2 SHORT 0x0
 
-.text             0x000200        0x1a2
+.text             0x000200        0x1b8
  *(.init)
  .init            0x000200         0x40 c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\liblega-pic30-coff.a(crt0_standard.o)
                   0x000200                  _resetPRI
                   0x000200                  _reset
                   0x000230                  _psv_init
- .init            0x000240         0x7c c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\liblega-pic30-coff.a(data_init_standard.o)
-                  0x000246                  _data_init_standard
-                  0x000246                  _data_init
+ .init            0x000240         0x1c c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\liblega-pic30-coff.a(delay32.Lo)
+                  0x000240                  __delay32
+ .init            0x00025c         0x7c c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\liblega-pic30-coff.a(data_init_standard.o)
+                  0x000262                  _data_init_standard
+                  0x000262                  _data_init
  *(.user_init)
  *(.handle)
  *(.isr*)
- .isr.text        0x0002bc         0x3c build/default/production/_ext/725218671/main_slave.o
-                  0x0002bc                  _INT0Interrupt
- .isr.text        0x0002f8         0x86 build/default/production/_ext/1673019547/I2C_slave.o
-                  0x0002f8                  _SI2C1Interrupt
- .isr             0x00037e          0x4 default_isr
-                  0x00037e                  _DefaultInterrupt
+ .isr.text        0x0002d8         0x3c build/default/production/_ext/725218671/main_slave.o
+                  0x0002d8                  _INT0Interrupt
+ .isr.text        0x000314         0x80 build/default/production/_ext/1673019547/I2C_slave.o
+                  0x000314                  _SI2C1Interrupt
+ .isr             0x000394          0x4 default_isr
+                  0x000394                  _DefaultInterrupt
  *(.libc)
- .libc            0x000382         0x20 c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\liblega-c-coff.a(strcmp.XX_o)
-                  0x000382                  strcmp
+ .libc            0x000398         0x20 c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\liblega-c-coff.a(strcmp.XX_o)
+                  0x000398                  strcmp
  *(.libm)
  *(.libdsp)
  *(.lib*)
@@ -245,12 +253,12 @@ usercode
 
 __FBS             0xf80000          0x2
  *(__FBS.sec*)
- __FBS.sec        0xf80000          0x2 /CW/_FBSpOÃ
+ __FBS.sec        0xf80000          0x2 /CW/_FBS¿sﬂ
                   0xf80000                  _FBS.sec
 
 __FGS             0xf80004          0x2
  *(__FGS.sec*)
- __FGS.sec        0xf80004          0x2 /CW/_FGS`?Ã
+ __FGS.sec        0xf80004          0x2 /CW/_FGS–Éﬂ
                   0xf80004                  _FGS.sec
 
 __FOSCSEL
@@ -947,29 +955,33 @@ LOAD c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\libm-coff.a
 LOAD c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\liblega-c-coff.a
 END GROUP
 OUTPUT(dist/default/production/bebionic_slave.X.production.cof coff-pic30)
-LOAD /CW/_FGS`?Ã
-LOAD /CW/_FBSpOÃ
+LOAD /CW/_FGS–Éﬂ
+LOAD /CW/_FBS¿sﬂ
 LOAD data_init
 LOAD default_isr
 
 __c30_signature
-                  0x000000         0x1e
+                  0x000000         0x2a
  __c30_signature
                   0x000000          0x6 build/default/production/_ext/725218671/main_slave.o
  __c30_signature
                   0x000006          0x6 build/default/production/_ext/1673019547/I2C_slave.o
  __c30_signature
-                  0x00000c          0x6 c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\liblega-pic30-coff.a(crt0_standard.o)
+                  0x00000c          0x6 build/default/production/_ext/1673019547/pwm_generator.o
  __c30_signature
-                  0x000012          0x6 c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\liblega-pic30-coff.a(data_init_standard.o)
+                  0x000012          0x6 c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\liblega-pic30-coff.a(crt0_standard.o)
  __c30_signature
-                  0x000018          0x6 c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\liblega-c-coff.a(strcmp.XX_o)
+                  0x000018          0x6 c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\liblega-pic30-coff.a(delay32.Lo)
+ __c30_signature
+                  0x00001e          0x6 c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\liblega-pic30-coff.a(data_init_standard.o)
+ __c30_signature
+                  0x000024          0x6 c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\liblega-c-coff.a(strcmp.XX_o)
 
 .nbss               0x0800          0x8
  .nbss              0x0800          0x6 build/default/production/_ext/1673019547/I2C_slave.o
-                    0x0800                  value
-                    0x0802                  angle
-                    0x0804                  Flag
+                    0x0800                  Flag
+                    0x0802                  value
+                    0x0804                  angle
  .nbss              0x0806          0x2 build/default/production/_ext/725218671/main_slave.o
                     0x0806                  pulse
 
@@ -1001,16 +1013,17 @@ __c30_signature
  .ivt._SI2C1Interrupt
                   0x000034          0x2 build/default/production/_ext/1673019547/I2C_slave.o
 
-.const              0x83a2         0x16 load address 0x0003a2  
- .const             0x83a2         0x16 build/default/production/_ext/725218671/main_slave.o
+.const              0x83b8         0x16 load address 0x0003b8  
+ .const             0x83b8         0x16 build/default/production/_ext/1673019547/pwm_generator.o
 
-.text             0x0003b8         0xc2
- .text            0x0003b8         0xac build/default/production/_ext/725218671/main_slave.o
-                  0x0003b8                  PWM
-                  0x000444                  Interrupt0_Init
-                  0x000454                  main
- .text            0x000464         0x16 build/default/production/_ext/1673019547/I2C_slave.o
-                  0x000464                  I2C_init
+.text             0x0003ce         0xe2
+ .text            0x0003ce         0x8c build/default/production/_ext/1673019547/pwm_generator.o
+                  0x0003ce                  PWM
+ .text            0x00045a         0x40 build/default/production/_ext/725218671/main_slave.o
+                  0x00045a                  Interrupt0_Init
+                  0x00046a                  main
+ .text            0x00049a         0x16 build/default/production/_ext/1673019547/I2C_slave.o
+                  0x00049a                  i2c_Init
 
-.dinit            0x00047a          0xe
- .dinit           0x00047a          0xe data_init
+.dinit            0x0004b0          0xe
+ .dinit           0x0004b0          0xe data_init

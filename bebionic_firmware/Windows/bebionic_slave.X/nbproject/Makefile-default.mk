@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=../../current_files/main_slave.c ../../current_files/libraries/I2C_slave.c
+SOURCEFILES_QUOTED_IF_SPACED=../../current_files/main_slave.c ../../current_files/libraries/I2C_slave.c ../../current_files/libraries/pwm_generator.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/725218671/main_slave.o ${OBJECTDIR}/_ext/1673019547/I2C_slave.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/725218671/main_slave.o.d ${OBJECTDIR}/_ext/1673019547/I2C_slave.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/725218671/main_slave.o ${OBJECTDIR}/_ext/1673019547/I2C_slave.o ${OBJECTDIR}/_ext/1673019547/pwm_generator.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/725218671/main_slave.o.d ${OBJECTDIR}/_ext/1673019547/I2C_slave.o.d ${OBJECTDIR}/_ext/1673019547/pwm_generator.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/_ext/725218671/main_slave.o ${OBJECTDIR}/_ext/1673019547/I2C_slave.o
+OBJECTFILES=${OBJECTDIR}/_ext/725218671/main_slave.o ${OBJECTDIR}/_ext/1673019547/I2C_slave.o ${OBJECTDIR}/_ext/1673019547/pwm_generator.o
 
 # Source Files
-SOURCEFILES=../../current_files/main_slave.c ../../current_files/libraries/I2C_slave.c
+SOURCEFILES=../../current_files/main_slave.c ../../current_files/libraries/I2C_slave.c ../../current_files/libraries/pwm_generator.c
 
 
 
@@ -109,6 +109,13 @@ ${OBJECTDIR}/_ext/1673019547/I2C_slave.o: ../../current_files/libraries/I2C_slav
 	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../current_files/libraries/I2C_slave.c  -o ${OBJECTDIR}/_ext/1673019547/I2C_slave.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1673019547/I2C_slave.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1    -omf=coff -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -I"../../../../../../../Program Files (x86)/Microchip/xc16/v1.50/support/dsPIC33F/h" -msmart-io=1 -Wall -msfr-warn=off    -mdfp=${DFP_DIR}/xc16
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1673019547/I2C_slave.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
+${OBJECTDIR}/_ext/1673019547/pwm_generator.o: ../../current_files/libraries/pwm_generator.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/1673019547" 
+	@${RM} ${OBJECTDIR}/_ext/1673019547/pwm_generator.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1673019547/pwm_generator.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../current_files/libraries/pwm_generator.c  -o ${OBJECTDIR}/_ext/1673019547/pwm_generator.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1673019547/pwm_generator.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1    -omf=coff -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -I"../../../../../../../Program Files (x86)/Microchip/xc16/v1.50/support/dsPIC33F/h" -msmart-io=1 -Wall -msfr-warn=off    -mdfp=${DFP_DIR}/xc16
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1673019547/pwm_generator.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
 else
 ${OBJECTDIR}/_ext/725218671/main_slave.o: ../../current_files/main_slave.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/725218671" 
@@ -123,6 +130,13 @@ ${OBJECTDIR}/_ext/1673019547/I2C_slave.o: ../../current_files/libraries/I2C_slav
 	@${RM} ${OBJECTDIR}/_ext/1673019547/I2C_slave.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../current_files/libraries/I2C_slave.c  -o ${OBJECTDIR}/_ext/1673019547/I2C_slave.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1673019547/I2C_slave.o.d"        -g -omf=coff -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -I"../../../../../../../Program Files (x86)/Microchip/xc16/v1.50/support/dsPIC33F/h" -msmart-io=1 -Wall -msfr-warn=off    -mdfp=${DFP_DIR}/xc16
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1673019547/I2C_slave.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/_ext/1673019547/pwm_generator.o: ../../current_files/libraries/pwm_generator.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/1673019547" 
+	@${RM} ${OBJECTDIR}/_ext/1673019547/pwm_generator.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1673019547/pwm_generator.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../current_files/libraries/pwm_generator.c  -o ${OBJECTDIR}/_ext/1673019547/pwm_generator.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1673019547/pwm_generator.o.d"        -g -omf=coff -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -I"../../../../../../../Program Files (x86)/Microchip/xc16/v1.50/support/dsPIC33F/h" -msmart-io=1 -Wall -msfr-warn=off    -mdfp=${DFP_DIR}/xc16
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1673019547/pwm_generator.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 endif
 

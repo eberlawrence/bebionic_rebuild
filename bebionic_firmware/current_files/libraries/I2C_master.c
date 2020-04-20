@@ -1,115 +1,76 @@
+/* 
+ * File:   I2C_master.c
+ * Author: Eber Lawrence
+ *
+ * Created on 18 de Abril de 2020, 20:00
+ */
 
 #include <p33FJ32MC202.h>
 #include "I2C_master.h"
 
-void I2C_init(void)
-{   
-    I2C1BRG = EEPROMbaud;   // @400kHz; (FCY/FSCL - FCY/1e7) - 1
-    I2C1CON = 0x8000;
-    IEC1bits.MI2C1IE = 1;   // Master I2C interrupt
+// Initialise I2C communication - Master mode
+void i2c_Init(uint32_t FSCL){   
+    I2C1BRG = (FOSC / FSCL) - 2; // I2C Master mode, define the SCL clock frequency
+    _I2CEN = 0;  // Disable I2C
+    _DISSLW = 1; // Disable slew rate control
+    _A10M = 0;   // 7-bit slave addr
+    _SCLREL = 1; // SCL release control
+    _I2CEN = 1;  // Enable I2C
+    _MI2C1IE = 0;   // Master I2C interrupt
+    _MI2C1IF = 0;   // MI2C Flag
 }
 
-void __attribute__((interrupt, no_auto_psv)) _MI2C1Interrupt(void)
-{    
-    IFS1bits.MI2C1IF = 0;   // MI2C Flag
+void i2c_Ack(void)
+{
+    _ACKDT = 0;      // Send ACK
+    _ACKEN = 1;      // Initiate Acknowledge and transmit ACKDT
+    while(_ACKEN);
+}
+ 
+void i2c_Nack(void)
+{
+    _ACKDT = 1;      // Send NACK
+    _ACKEN = 1;      // Initiate Acknowledge and transmit ACKDT
+    while(_ACKEN);  
 }
 
-void I2CAck(void)
+void i2c_WaitACK(void)
 {
-    I2C1CONbits.ACKDT = 0;      // Send ACK
-    I2C1CONbits.ACKEN = 1;      // Initiate Acknowledge and transmit ACKDT
-    while(I2CCONbits.ACKEN);
-}
- 
-void I2CNack(void)
-{
-    I2C1CONbits.ACKDT = 1;      // Send NACK
-    I2C1CONbits.ACKEN = 1;      // Initiate Acknowledge and transmit ACKDT
-    while(I2CCONbits.ACKEN);  
-}
- 
-void I2CStop(void)
-{
-    I2C1CONbits.RCEN = 0;       // receive mode not in progress
-    I2C1CONbits.PEN = 1;        // Stop condition
-    while(I2C1CONbits.PEN);
-}
- 
-void I2CStart(void)
-{
-    I2C1CONbits.ACKDT = 0;      // Reset any ACK
-    I2C1CONbits.SEN = 1;        // Start
-    while(I2C1CONbits.SEN);
-}
- 
-void I2CRestart(void)
-{
-    I2C1CONbits.RSEN = 1;       // Repeated Start Condition
-    while(I2C1CONbits.RSEN);
-    I2C1CONbits.ACKDT = 0;      // Send ACK
-    I2C1STATbits.TBF = 0;       // I2C1TRN is empty
-}
- 
-void I2CWaitACK(void)
-{
-    while(I2C1STATbits.ACKSTAT);
-}
- 
-void I2CIdle(void)
-{
-    while(I2CSTATbits.TRSTAT);
-}
- 
-void I2CWrite(unsigned char c)
-{
-    I2C1TRN = c;
-    while(I2C1STATbits.TBF);
-}
- 
-void I2CRead(void)
-{
-    I2CCONbits.RCEN = 1;
-    //Nop();
-    while(!I2CSTATbits.RBF);
+    while(_ACKSTAT);
 }
 
-void I2CWriteReg(char addr, char v)
+void i2c_Idle(void)
 {
-    // Start Condition
-    I2CStart();
-    // EEPROM Addr
-    I2CWrite((addr<<1)&0xFE);
-    I2CIdle();
-    // Value
-    I2CWrite(v);
-    I2CIdle();
-    // Stop
-    I2CStop();
-}
- 
- 
-char I2CReadReg(char addr, char byteHigh, char byteLow)
-{
-    char temp;
-    // Start Condition
-    I2CStart();
-    // EEPROM Addr
-    I2CWrite((addr<<1)&0xFE);
-    I2CIdle();
-    // Addr High Byte
-    I2CWrite(byteHigh);
-    I2CIdle();
-    // Addr Low Byte
-    I2CWrite(byteLow);
-    I2CIdle();
-    // Restart
-    I2CRestart();
-    I2CWrite((addr<<1)|0x01);
-    I2CIdle();  
-    I2CRead();
-    I2CNack();
-    I2CStop();
-    temp = I2C1RCV;
-    return temp;
+    while(_TRSTAT);
 }
 
+// Start I2C communication
+void i2c_Start(void)
+{
+    _ACKDT = 0;      // Reset any ACK
+    _SEN = 1;        // Start
+    while(_SEN);
+}
+
+// Re-Start I2C communication
+void i2c_Restart(void){
+    _RSEN = 1;       // Repeated Start Condition
+    while(_RSEN);
+    _ACKDT = 0;      // Send ACK
+    _TBF = 0;       // I2C1TRN is empty
+}
+
+// Stop I2C communication
+void i2c_Stop(void)
+{
+    _RCEN = 0;       // receive mode not in progress
+    _PEN = 1;        // Stop condition
+    while(_PEN);
+}
+
+// Sends one byte of data
+void i2c_Write(uint8_t data)
+{
+    I2C1TRN = data;
+    while(_TBF);
+}

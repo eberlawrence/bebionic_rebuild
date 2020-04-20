@@ -1,6 +1,6 @@
 /* 
- * File:   main_header.h
- * Author: Eber
+ * File:   header.h
+ * Author: Eber Lawrence
  *
  * Created on 18 de Abril de 2020, 19:50
  */
@@ -54,15 +54,19 @@ extern "C" {
 // #pragma config statements should precede project file includes.
 // Use project enums instead of #define for ON and OFF.
 
-
-#include <p33FJ32MC202.h>
-#include <libpic30.h>
-
-
+#ifndef FOSC
 #define FOSC 7370000LL
 #define FCY (FOSC/2)
-
-
+#endif 
+    
+#include <p33FJ32MC202.h>
+#include <libpic30.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <string.h>
+#include <stdio.h>
+#include <math.h>
+    
 #ifdef	__cplusplus
 }
 #endif

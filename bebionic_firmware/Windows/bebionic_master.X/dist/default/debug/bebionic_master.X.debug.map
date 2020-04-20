@@ -53,8 +53,12 @@ Archive member included because of file (symbol)
 
 c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\liblega-pic30-coff.a(crt0_standard.o)
                               (_resetPRI)
+c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\liblega-pic30-coff.a(delay32.Lo)
+                              build/default/debug/_ext/725218671/main_master.o (__delay32)
 c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\liblega-pic30-coff.a(data_init_standard.o)
                               c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\liblega-pic30-coff.a(crt0_standard.o) (_data_init_standard)
+c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\libm-coff.a(divmoddi3.o)
+                              build/default/debug/_ext/1673019547/I2C_master.o (__divdi3)
 
 
 Selected CodeGuard Options:
@@ -84,11 +88,11 @@ Default Scalar Model: Small
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
-.text                        0x200                0xf8           0x174  (372)
-.text                        0x2f8               0x18a           0x24f  (591)
-.dinit                       0x482                 0x8             0xc  (12)
+.text                        0x200               0x2e4           0x456  (1110)
+.text                        0x4e4               0x136           0x1d1  (465)
+.dinit                       0x61a                 0x8             0xc  (12)
 
-                 Total "program" memory used (bytes):          0x3cf  (975) 2%
+                 Total "program" memory used (bytes):          0x633  (1587) 4%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x800]
@@ -124,57 +128,61 @@ External Symbols in Program Memory (by address):
 
                   0x000200                  __resetPRI
                   0x000230                  __psv_init
-                  0x000246                  __data_init
-                  0x000246                  __data_init_standard
-                  0x0002bc                  __INT1Interrupt
-                  0x0002d4                  __INT2Interrupt
-                  0x0002ec                  __MI2C1Interrupt
-                  0x0002f4                  __DefaultInterrupt
-                  0x0002f8                  _I2C_init
-                  0x000308                  _I2CAck
-                  0x00031c                  _I2CNack
-                  0x000330                  _I2CStop
-                  0x000344                  _I2CStart
-                  0x000358                  _I2CRestart
-                  0x00036e                  _I2CWaitACK
-                  0x000380                  _I2CIdle
-                  0x000392                  _I2CWrite
-                  0x0003a8                  _I2CRead
-                  0x0003ba                  _I2CWriteReg
-                  0x0003d8                  _I2CReadReg
-                  0x00041a                  _Interrupt1_Init
-                  0x00043a                  _Interrupt2_Init
-                  0x000458                  _main
+                  0x000240                  ___delay32
+                  0x000262                  __data_init
+                  0x000262                  __data_init_standard
+                  0x0002d8                  __INT1Interrupt
+                  0x0002e8                  __INT2Interrupt
+                  0x0002f8                  __DefaultInterrupt
+                  0x00033c                  ___udivmoddi3
+                  0x0003cc                  ___udivdi3
+                  0x0003da                  ___umoddi3
+                  0x0003e2                  ___divdi3
+                  0x000410                  ___moddi3
+                  0x0004e4                  _i2c_Init
+                  0x000510                  _i2c_Ack
+                  0x000524                  _i2c_Nack
+                  0x000538                  _i2c_WaitACK
+                  0x00054a                  _i2c_Idle
+                  0x00055c                  _i2c_Start
+                  0x000570                  _i2c_Restart
+                  0x000586                  _i2c_Stop
+                  0x00059a                  _i2c_Write
+                  0x0005b0                  _Interrupt1_Init
+                  0x0005d0                  _Interrupt2_Init
+                  0x0005ee                  _main
                   0xf80000                  __FBS.sec
                   0xf80004                  __FGS.sec
 
 External Symbols in Program Memory (by name):
 
-                  0x000308                  _I2CAck
-                  0x000380                  _I2CIdle
-                  0x00031c                  _I2CNack
-                  0x0003a8                  _I2CRead
-                  0x0003d8                  _I2CReadReg
-                  0x000358                  _I2CRestart
-                  0x000344                  _I2CStart
-                  0x000330                  _I2CStop
-                  0x00036e                  _I2CWaitACK
-                  0x000392                  _I2CWrite
-                  0x0003ba                  _I2CWriteReg
-                  0x0002f8                  _I2C_init
-                  0x00041a                  _Interrupt1_Init
-                  0x00043a                  _Interrupt2_Init
-                  0x0002f4                  __DefaultInterrupt
+                  0x0005b0                  _Interrupt1_Init
+                  0x0005d0                  _Interrupt2_Init
+                  0x0002f8                  __DefaultInterrupt
                   0xf80000                  __FBS.sec
                   0xf80004                  __FGS.sec
-                  0x0002bc                  __INT1Interrupt
-                  0x0002d4                  __INT2Interrupt
-                  0x0002ec                  __MI2C1Interrupt
-                  0x000246                  __data_init
-                  0x000246                  __data_init_standard
+                  0x0002d8                  __INT1Interrupt
+                  0x0002e8                  __INT2Interrupt
+                  0x000240                  ___delay32
+                  0x0003e2                  ___divdi3
+                  0x000410                  ___moddi3
+                  0x0003cc                  ___udivdi3
+                  0x00033c                  ___udivmoddi3
+                  0x0003da                  ___umoddi3
+                  0x000262                  __data_init
+                  0x000262                  __data_init_standard
                   0x000230                  __psv_init
                   0x000200                  __resetPRI
-                  0x000458                  _main
+                  0x000510                  _i2c_Ack
+                  0x00054a                  _i2c_Idle
+                  0x0004e4                  _i2c_Init
+                  0x000524                  _i2c_Nack
+                  0x000570                  _i2c_Restart
+                  0x00055c                  _i2c_Start
+                  0x000586                  _i2c_Stop
+                  0x000538                  _i2c_WaitACK
+                  0x00059a                  _i2c_Write
+                  0x0005ee                  _main
 
 Memory Configuration
 
@@ -234,27 +242,33 @@ LOAD c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\libfx-coff.a
                   0x000002          0x2 SHORT 0x0 ((ABSOLUTE (__reset) >> 0x10) & 0x7f)
                   0x000003          0x2 SHORT 0x0
 
-.text             0x000200         0xf8
+.text             0x000200        0x2e4
  *(.init)
  .init            0x000200         0x40 c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\liblega-pic30-coff.a(crt0_standard.o)
                   0x000200                  _resetPRI
                   0x000200                  _reset
                   0x000230                  _psv_init
- .init            0x000240         0x7c c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\liblega-pic30-coff.a(data_init_standard.o)
-                  0x000246                  _data_init_standard
-                  0x000246                  _data_init
+ .init            0x000240         0x1c c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\liblega-pic30-coff.a(delay32.Lo)
+                  0x000240                  __delay32
+ .init            0x00025c         0x7c c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\liblega-pic30-coff.a(data_init_standard.o)
+                  0x000262                  _data_init_standard
+                  0x000262                  _data_init
  *(.user_init)
  *(.handle)
  *(.isr*)
- .isr.text        0x0002bc         0x30 build/default/debug/_ext/725218671/main_master.o
-                  0x0002bc                  _INT1Interrupt
-                  0x0002d4                  _INT2Interrupt
- .isr.text        0x0002ec          0x8 build/default/debug/_ext/1673019547/I2C_master.o
-                  0x0002ec                  _MI2C1Interrupt
- .isr             0x0002f4          0x4 default_isr
-                  0x0002f4                  _DefaultInterrupt
+ .isr.text        0x0002d8         0x20 build/default/debug/_ext/725218671/main_master.o
+                  0x0002d8                  _INT1Interrupt
+                  0x0002e8                  _INT2Interrupt
+ .isr             0x0002f8          0x4 default_isr
+                  0x0002f8                  _DefaultInterrupt
  *(.libc)
  *(.libm)
+ .libm            0x0002fc        0x1e8 c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\libm-coff.a(divmoddi3.o)
+                  0x00033c                  __udivmoddi3
+                  0x0003cc                  __udivdi3
+                  0x0003da                  __umoddi3
+                  0x0003e2                  __divdi3
+                  0x000410                  __moddi3
  *(.libdsp)
  *(.lib*)
 
@@ -263,12 +277,12 @@ usercode
 
 __FBS             0xf80000          0x2
  *(__FBS.sec*)
- __FBS.sec        0xf80000          0x2 /CW/_FBSê÷√
+ __FBS.sec        0xf80000          0x2 /CW/_FBSpÿÀ
                   0xf80000                  _FBS.sec
 
 __FGS             0xf80004          0x2
  *(__FGS.sec*)
- __FGS.sec        0xf80004          0x2 /CW/_FGSp∂√
+ __FGS.sec        0xf80004          0x2 /CW/_FGS¿(Ã
                   0xf80004                  _FGS.sec
 
 __FOSCSEL
@@ -965,13 +979,13 @@ LOAD c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\libm-coff.a
 LOAD c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\liblega-c-coff.a
 END GROUP
 OUTPUT(dist/default/debug/bebionic_master.X.debug.cof coff-pic30)
-LOAD /CW/_FGSp∂√
-LOAD /CW/_FBSê÷√
+LOAD /CW/_FGS¿(Ã
+LOAD /CW/_FBSpÿÀ
 LOAD data_init
 LOAD default_isr
 
 __c30_signature
-                  0x000000         0x18
+                  0x000000         0x24
  __c30_signature
                   0x000000          0x6 build/default/debug/_ext/725218671/main_master.o
  __c30_signature
@@ -979,7 +993,11 @@ __c30_signature
  __c30_signature
                   0x00000c          0x6 c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\liblega-pic30-coff.a(crt0_standard.o)
  __c30_signature
-                  0x000012          0x6 c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\liblega-pic30-coff.a(data_init_standard.o)
+                  0x000012          0x6 c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\liblega-pic30-coff.a(delay32.Lo)
+ __c30_signature
+                  0x000018          0x6 c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\liblega-pic30-coff.a(data_init_standard.o)
+ __c30_signature
+                  0x00001e          0x6 c:/program files (x86)/microchip/xc16/v1.50/bin/bin/../../lib\libm-coff.a(divmoddi3.o)
 
 .nbss               0x0800          0x2
  .nbss              0x0800          0x2 build/default/debug/_ext/725218671/main_master.o
@@ -1013,29 +1031,21 @@ __c30_signature
  .ivt._INT2Interrupt
                   0x00004e          0x2 build/default/debug/_ext/725218671/main_master.o
 
-.ivt._MI2C1Interrupt
-                  0x000036          0x2
- .ivt._MI2C1Interrupt
-                  0x000036          0x2 build/default/debug/_ext/1673019547/I2C_master.o
+.text             0x0004e4        0x136
+ .text            0x0004e4         0xcc build/default/debug/_ext/1673019547/I2C_master.o
+                  0x0004e4                  i2c_Init
+                  0x000510                  i2c_Ack
+                  0x000524                  i2c_Nack
+                  0x000538                  i2c_WaitACK
+                  0x00054a                  i2c_Idle
+                  0x00055c                  i2c_Start
+                  0x000570                  i2c_Restart
+                  0x000586                  i2c_Stop
+                  0x00059a                  i2c_Write
+ .text            0x0005b0         0x6a build/default/debug/_ext/725218671/main_master.o
+                  0x0005b0                  Interrupt1_Init
+                  0x0005d0                  Interrupt2_Init
+                  0x0005ee                  main
 
-.text             0x0002f8        0x18a
- .text            0x0002f8        0x122 build/default/debug/_ext/1673019547/I2C_master.o
-                  0x0002f8                  I2C_init
-                  0x000308                  I2CAck
-                  0x00031c                  I2CNack
-                  0x000330                  I2CStop
-                  0x000344                  I2CStart
-                  0x000358                  I2CRestart
-                  0x00036e                  I2CWaitACK
-                  0x000380                  I2CIdle
-                  0x000392                  I2CWrite
-                  0x0003a8                  I2CRead
-                  0x0003ba                  I2CWriteReg
-                  0x0003d8                  I2CReadReg
- .text            0x00041a         0x68 build/default/debug/_ext/725218671/main_master.o
-                  0x00041a                  Interrupt1_Init
-                  0x00043a                  Interrupt2_Init
-                  0x000458                  main
-
-.dinit            0x000482          0x8
- .dinit           0x000482          0x8 data_init
+.dinit            0x00061a          0x8
+ .dinit           0x00061a          0x8 data_init
