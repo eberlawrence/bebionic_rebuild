@@ -2,3 +2,7 @@
 /bebionic_firmware.X/build/
 /bebionic_firmware_L.X/dist/
 /bebionic_firmware_L.X/build/
+/bebionic_firmware/Ubuntu/bebionic_master.X/dist/
+/bebionic_firmware/Ubuntu/bebionic_master.X/build/
+/bebionic_firmware/Ubuntu/bebionic_slave.X/build/
+/bebionic_firmware/Ubuntu/bebionic_slave.X/dist/

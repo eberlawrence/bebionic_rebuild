@@ -28,10 +28,7 @@ struct FlagType
 extern struct FlagType Flag;
 
 void i2c_Init(uint8_t address);
-void __attribute__((interrupt,no_auto_psv)) _SI2C1Interrupt(void);
-
-
-
+void __attribute__((interrupt, no_auto_psv)) _SI2C1Interrupt(void);
 
 #ifdef	__cplusplus
 }

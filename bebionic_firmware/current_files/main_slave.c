@@ -5,7 +5,7 @@
  * Created on April 3, 2020, 2:57 PM
  */
 
-#define ADDR 20
+#define ADDR 60
 
 #include "header.h"
 #include "libraries/I2C_slave.h"
@@ -17,7 +17,7 @@ void Interrupt0_Init( void )
 {
     _INT0EP = 0; // External interrupt edge detect polarity
     _INT0IE = 1; // 
-    _INT0IP = 7; 
+    _INT0IP = 1; 
 }
 
 void __attribute__((interrupt, auto_psv)) _INT0Interrupt( void )               
@@ -42,19 +42,19 @@ int main(void) {
     
     _TRISB2  = 0;
     _TRISB3  = 0;
-    _TRISB4  = 0;
+    _TRISB12 = 0;
     _TRISB13 = 0; 
     _RB13    = 1;
     
     Interrupt0_Init();
     i2c_Init(ADDR);
     
-    
-    while(1){
+    while(1){        
+
         if (value == 40){
-            _RB4 = 1;
+            _RB12 = 1;
             __delay_ms(500);
-            _RB4 = 0;
+            _RB12 = 0;
             __delay_ms(500);
         }
     }

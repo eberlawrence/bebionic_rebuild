@@ -16,7 +16,9 @@ extern "C" {
 #define FOSC 7370000LL
 #define FCY (FOSC/2)
 #endif
-    
+
+void __attribute__((interrupt, no_auto_psv)) _MI2C1Interrupt(void);
+
 void i2c_Init(uint32_t FSCL);
 void i2c_Ack(void); 
 void i2c_Nack(void);
@@ -25,7 +27,8 @@ void i2c_Idle(void);
 void i2c_Start(void);
 void i2c_Restart(void);
 void i2c_Stop(void);
-void i2c_Write(uint8_t data);
+void i2c_Write(_Bool addr, int r_w, uint8_t data);
+uint8_t i2c_Read(void);
 
 #ifdef	__cplusplus
 }

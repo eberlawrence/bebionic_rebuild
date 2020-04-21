@@ -64,8 +64,6 @@ extern "C" {
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
-#include <stdio.h>
-#include <math.h>
     
 #ifdef	__cplusplus
 }

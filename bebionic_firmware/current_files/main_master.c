@@ -39,22 +39,42 @@ void __attribute__((interrupt, no_auto_psv)) _INT2Interrupt( void )
 }
 
 int main(void) {
+    _TRISB4  = 0;
+    _TRISB5  = 1;
+    _TRISB12 = 0;
     
-    TRISBbits.TRISB5 =   1; 
     Interrupt1_Init();
     Interrupt2_Init();
     i2c_Init(100000);
-    
+    int i = 1;
     while(1){
-        if (task == 2){
+        if (task == 1){
             i2c_Start();
-            i2c_Write(20 << 1);
+            i2c_Write(1, 0, 60);
             i2c_Idle();
-            i2c_Write(40);
+            i2c_Write(0, 0, i);
             i2c_Idle();
+            i2c_Restart();
+            i2c_Write(1, 1, 60);
+            i2c_Idle();
+            i2c_Read();
+            i2c_Nack();
             i2c_Stop();
-        }       
-        __delay_ms(500);      
+            
+            task = 0;
+            i += 1;
+        } 
+        /*
+        else if (task == 2){
+            i2c_Start();
+            i2c_Write(1, 1, 60);
+            i2c_Idle();
+            i2c_Read();
+            i2c_Nack();
+            i2c_Stop();
+            task = 0;
+            
+        }*/
     }
     return 0;
 }
