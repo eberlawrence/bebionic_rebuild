@@ -5,6 +5,13 @@
  * Created on 18 de Abril de 2020, 20:00
  */
 
+#if defined(__dsPIC33FJ32MC202__)
+#include <p33FJ32MC202.h>
+#endif
+#if defined(__dsPIC33FJ32MC204__)
+#include <p33FJ32MC204.h>
+#endif   
+
 #include "header.h"
 #include "libraries/I2C_master.h"
 

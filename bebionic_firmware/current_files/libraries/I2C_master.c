@@ -5,7 +5,7 @@
  * Created on 18 de Abril de 2020, 20:00
  */
 
-#include <p33FJ32MC202.h>
+/* LIBRARIES */
 #include "I2C_master.h"
 
 void __attribute__((interrupt, auto_psv)) _MI2C1Interrupt(void)
@@ -15,38 +15,43 @@ void __attribute__((interrupt, auto_psv)) _MI2C1Interrupt(void)
     _MI2C1IF = 0;		
 }
 
-// Initialise I2C communication - Master mode
+/* Initialise I2C communication - Master mode */
 void i2c_Init(uint32_t FSCL){   
     
-    _TRISB8 = 1;
-    _TRISB9 = 1;
+    /* Config both SCL and SDA ports as INPUT */
+    _TRISB8  = 1;   // SCL port                                             - INPUT
+    _TRISB9  = 1;   // SDA port                                             - INPUT
     
-    _I2CEN   = 0; // disable I2C1
-    _I2CSIDL = 0; // continue in Idle mode
-    // Unimplemented bit.
-    _SCLREL  = 0; // SCL release control
-    _IPMIEN  = 0;
-    _A10M    = 0; // 7 bit address mode
-    _DISSLW  = 0; // Slew rate control
-    _SMEN    = 0;
-    _GCEN    = 0;
-    _STREN   = 0;
-    _ACKDT   = 1;
-    _ACKEN   = 0;
-    _RCEN    = 0;
-    _PEN     = 0;
-    _RSEN    = 0;
-    _SEN     = 0;
-
-    _MI2C1IF = 0;   // Master I2C interrupt
-    _SI2C1IF = 0;   // Slave I2C interrupt
+    /* I2C1CON Register configuration - All bits '1/0' */
+    _I2CEN   = 0;   // enable/disable I2C1                                  - DISABLE
+ // _XXXX    = x;   // unimplemented bit. Read as '0                        - ~~
+    _I2CSIDL = 0;   // discontinue/continue Idle mode                       - CONTINUE
+    _SCLREL  = 0;   // release/stretch SCL clock control (Slave mode)       - ~~
+    _IPMIEN  = 0;   // enable/disable IPMI support mode                     - DISABLE
+    _A10M    = 0;   // 10-bit/7-bit slave address mode                      - 7-BIT
+    _DISSLW  = 0;   // disable/enable slew rate control                     - ENABLE
+    _SMEN    = 0;   // enable/disable SMBus I/O pin threshold               - DISABLE
+    _GCEN    = 0;   // enable/disable general call address                  - DISABLE
+    _STREN   = 0;   // enable/disable SCL clock stetch (Slave mode)         - ~~
     
-    _MI2C1IE = 1;   // MI2C Flag
-    _SI2C1IE = 0;   // SI2C Flag
+    /* Hardware Clearable bits
+    _ACKDT   = 0;   // NACK/ACK during an acknowledge   
+    _ACKEN   = 0;   // enable/disable transmission of the ACKDT data bit
+    _RCEN    = 0;   // enable/disable receive mode
+    _PEN     = 0;   // enable/disable stop condition
+    _RSEN    = 0;   // enable/disable restart condition
+    _SEN     = 0;   // enable/disable start condition
+    */
+    
+    _MI2C1IF = 0;   // enable/disable master I2C interrupt flag             - DISABLE
+    _SI2C1IF = 0;   // enable/disable slave I2C interrupt flag              - DISABLE
+    
+    _MI2C1IE = 1;   // enable/disable master I2C interrupt event            - ENABLE
+    _SI2C1IE = 0;   // enable/disable slave I2C interrupt event             - DISABLE
     
     I2C1STAT = 0x00;
-    I2C1BRG = (FOSC / FSCL) - 2; // I2C Master mode, define the SCL clock frequency
-    _I2CEN = 1;  // Enable I2C
+    I2C1BRG  = (((1 / FSCL) - delay) * FOSC) - 2; // define the SCL clock frequency (Master mode)
+    _I2CEN   = 1;   // enable/disable I2C1                                  - DISABLE
 }
 
 void i2c_Ack(void)

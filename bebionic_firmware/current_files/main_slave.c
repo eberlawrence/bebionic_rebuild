@@ -7,6 +7,13 @@
 
 #define ADDR 60
 
+#if defined(__dsPIC33FJ32MC202__)
+#include <p33FJ32MC202.h>
+#endif
+#if defined(__dsPIC33FJ32MC204__)
+#include <p33FJ32MC202.h>
+#endif   
+
 #include "header.h"
 #include "libraries/I2C_slave.h"
 #include "libraries/pwm_generator.h"

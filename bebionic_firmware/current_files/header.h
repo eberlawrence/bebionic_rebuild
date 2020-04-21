@@ -57,9 +57,8 @@ extern "C" {
 #ifndef FOSC
 #define FOSC 7370000LL
 #define FCY (FOSC/2)
-#endif 
-    
-#include <p33FJ32MC202.h>
+#endif  
+
 #include <libpic30.h>
 #include <stdlib.h>
 #include <stdint.h>
