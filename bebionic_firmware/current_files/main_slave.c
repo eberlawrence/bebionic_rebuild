@@ -5,8 +5,6 @@
  * Created on April 3, 2020, 2:57 PM
  */
 
-#define ADDR 60
-
 #if defined(__dsPIC33FJ32MC202__)
 #include <p33FJ32MC202.h>
 #endif
@@ -49,8 +47,7 @@ int main(void) {
     
     _TRISB2  = 0;
     _TRISB3  = 0;
-    _TRISB12 = 0;
-    _TRISB13 = 0; 
+    _TRISB13 = 0;
     _RB13    = 1;
     
     Interrupt0_Init();
@@ -58,11 +55,9 @@ int main(void) {
     
     while(1){        
 
-        if (value == 40){
-            _RB12 = 1;
-            __delay_ms(500);
-            _RB12 = 0;
-            __delay_ms(500);
+        if (value == 100){
+            PWM(50, "forward");
+            value = 0;
         }
     }
     return 0;

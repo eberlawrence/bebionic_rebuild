@@ -10,8 +10,6 @@
 
 void __attribute__((interrupt, auto_psv)) _MI2C1Interrupt(void)
 {
-    _RB12 = 1;
-    _RB12 = 0;
     _MI2C1IF = 0;		
 }
 

@@ -23,8 +23,10 @@ extern "C" {
 #if defined(__dsPIC33FJ32MC204__)
 #include <p33FJ32MC202.h>
 #endif   
+
+#define ADDR 10
     
-extern unsigned int value;	
+extern uint8_t value;	
 extern unsigned int angle;
 
 struct FlagType

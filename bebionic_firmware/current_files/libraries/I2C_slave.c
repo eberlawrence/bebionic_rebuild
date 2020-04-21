@@ -11,7 +11,7 @@
 /* VARIABLES */
 
 struct FlagType Flag;
-unsigned int value = 0;	
+uint8_t value = 0;	
 unsigned int angle = 0;
 uint8_t RAMBuffer[256];	//RAM area which will work as EEPROM for Master I2C device
 uint8_t *RAMPtr;			//Pointer to RAM memory locations
@@ -61,8 +61,6 @@ void i2c_Init(uint8_t addr){
 
 void __attribute__((interrupt, no_auto_psv)) _SI2C1Interrupt(void)
 {
-    _RB12 = 1;
-    _RB12 = 0;
 	unsigned char Temp;	//used for dummy read
     
 	if((_R_W == 0) && (_D_A == 0))	//Address matched
@@ -76,13 +74,14 @@ void __attribute__((interrupt, no_auto_psv)) _SI2C1Interrupt(void)
 			{
 				Flag.AddrFlag = 0;	
 				Flag.DataFlag = 1;	//next byte is data
-				RAMPtr = RAMPtr + I2C1RCV;
+				value = (uint8_t) I2C1RCV;
                 _SCLREL = 1;	//Release SCL1 line
 
 			}
 			else if(Flag.DataFlag)
 			{
 				*RAMPtr = (uint8_t)I2C1RCV;// store data into RAM
+                
 				Flag.AddrFlag = 0;//end of tx
 				Flag.DataFlag = 0;
 				RAMPtr = &RAMBuffer[0];	//reset the RAM pointer
@@ -93,7 +92,7 @@ void __attribute__((interrupt, no_auto_psv)) _SI2C1Interrupt(void)
 	else if((_R_W == 1) && (_D_A == 0))
 	{
 		Temp = I2C1RCV;
-		I2C1TRN = 0x10;	//Read data from RAM & send data to I2C master device
+		I2C1TRN = ADDR;	//Read data from RAM & send data to I2C master device
 		_SCLREL = 1;	//Release SCL1 line
 		while(_TBF);//Wait till all 
 		RAMPtr = &RAMBuffer[0];	//reset the RAM pointer

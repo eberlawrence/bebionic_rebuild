@@ -3,10 +3,10 @@
 
 void PWM(unsigned int speed, char direction[10]){
     unsigned int x, y;
-    TRISBbits.TRISB12 = 0;
-    TRISBbits.TRISB14 = 0;
-    PORTBbits.RB12 = 0;
-    PORTBbits.RB14 = 0;
+    _TRISB12 = 0;
+    _TRISB14 = 0;
+    _RB12 = 0;
+    _RB14 = 0;
     P1TCON = 0x0002;
     P1TMR = 0;
     P1TPER = 0x7FFE; // 56.23 Hz // (range => 1 - 7FFE)
@@ -18,13 +18,13 @@ void PWM(unsigned int speed, char direction[10]){
     if (strcmp(direction, "forward") == 0){
         PWM1CON1 = 0x0010;
         P1DC1 = y;
-        PORTBbits.RB12 = 0;
+        _RB12 = 0;
     }
     else if (strcmp(direction, "backward") == 0)
     {
         PWM1CON1 = 0x0020;
         P1DC2 = y;
-        PORTBbits.RB14 = 0;
+        _RB14 = 0;
     }
     else if (strcmp(direction, "stop") == 0){
         PWM1CON1 = 0x0030;
@@ -34,5 +34,5 @@ void PWM(unsigned int speed, char direction[10]){
     else {
         PWM1CON1 = 0x0000;
     } 
-    P1TCONbits.PTEN = 1;
+    _PTEN = 1;
 }
