@@ -1,12 +1,12 @@
 /* 
- * File:   pwm_generator.h
+ * File:   motor_pwm.h
  * Author: Eber
  *
  * Created on 20 de Abril de 2020, 03:58
  */
 
-#ifndef PWM_GENERATOR_H
-#define	PWM_GENERATOR_H
+#ifndef MOTOR_PWM_H
+#define	MOTOR_PWM_H
 
 #ifdef	__cplusplus
 extern "C" {
@@ -24,11 +24,11 @@ extern "C" {
 #include <stdio.h>
 #include <math.h>
 
-void PWM(unsigned int speed, char direction[10]);
+void motor_pwm_config(unsigned int speed, char direction[10]);
 
 #ifdef	__cplusplus
 }
 #endif
 
-#endif	/* PWM_GENERATOR_H */
+#endif	/* MOTOR_PWM_H */
 

@@ -23,21 +23,19 @@ extern "C" {
 #if defined(__dsPIC33FJ32MC204__)
 #include <p33FJ32MC202.h>
 #endif   
+    
 
 #define ADDR 10
     
 extern uint8_t value;	
+
 extern unsigned int angle;
 
-struct FlagType
-{
-	unsigned char AddrFlag:1;
-	unsigned char DataFlag:1;
-};
-extern struct FlagType Flag;
 
 void i2c_Init(uint8_t addr);
+
 void __attribute__((interrupt, no_auto_psv)) _SI2C1Interrupt(void);
+
 
 #ifdef	__cplusplus
 }

@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=../../current_files/main_slave.c ../../current_files/libraries/I2C_slave.c ../../current_files/libraries/pwm_generator.c
+SOURCEFILES_QUOTED_IF_SPACED=../../current_files/libraries/I2C_slave.c ../../current_files/libraries/encoder_interrupt.c ../../current_files/libraries/motor_pwm.c ../../current_files/main_slave.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/725218671/main_slave.o ${OBJECTDIR}/_ext/1673019547/I2C_slave.o ${OBJECTDIR}/_ext/1673019547/pwm_generator.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/725218671/main_slave.o.d ${OBJECTDIR}/_ext/1673019547/I2C_slave.o.d ${OBJECTDIR}/_ext/1673019547/pwm_generator.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/1673019547/I2C_slave.o ${OBJECTDIR}/_ext/1673019547/encoder_interrupt.o ${OBJECTDIR}/_ext/1673019547/motor_pwm.o ${OBJECTDIR}/_ext/725218671/main_slave.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/1673019547/I2C_slave.o.d ${OBJECTDIR}/_ext/1673019547/encoder_interrupt.o.d ${OBJECTDIR}/_ext/1673019547/motor_pwm.o.d ${OBJECTDIR}/_ext/725218671/main_slave.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/_ext/725218671/main_slave.o ${OBJECTDIR}/_ext/1673019547/I2C_slave.o ${OBJECTDIR}/_ext/1673019547/pwm_generator.o
+OBJECTFILES=${OBJECTDIR}/_ext/1673019547/I2C_slave.o ${OBJECTDIR}/_ext/1673019547/encoder_interrupt.o ${OBJECTDIR}/_ext/1673019547/motor_pwm.o ${OBJECTDIR}/_ext/725218671/main_slave.o
 
 # Source Files
-SOURCEFILES=../../current_files/main_slave.c ../../current_files/libraries/I2C_slave.c ../../current_files/libraries/pwm_generator.c
+SOURCEFILES=../../current_files/libraries/I2C_slave.c ../../current_files/libraries/encoder_interrupt.c ../../current_files/libraries/motor_pwm.c ../../current_files/main_slave.c
 
 
 
@@ -95,13 +95,6 @@ MP_LINKER_FILE_OPTION=,--script=p33FJ32MC202.gld
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-${OBJECTDIR}/_ext/725218671/main_slave.o: ../../current_files/main_slave.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/_ext/725218671" 
-	@${RM} ${OBJECTDIR}/_ext/725218671/main_slave.o.d 
-	@${RM} ${OBJECTDIR}/_ext/725218671/main_slave.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../current_files/main_slave.c  -o ${OBJECTDIR}/_ext/725218671/main_slave.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/725218671/main_slave.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1    -omf=coff -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp=${DFP_DIR}/xc16
-	@${FIXDEPS} "${OBJECTDIR}/_ext/725218671/main_slave.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
-	
 ${OBJECTDIR}/_ext/1673019547/I2C_slave.o: ../../current_files/libraries/I2C_slave.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/1673019547" 
 	@${RM} ${OBJECTDIR}/_ext/1673019547/I2C_slave.o.d 
@@ -109,21 +102,28 @@ ${OBJECTDIR}/_ext/1673019547/I2C_slave.o: ../../current_files/libraries/I2C_slav
 	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../current_files/libraries/I2C_slave.c  -o ${OBJECTDIR}/_ext/1673019547/I2C_slave.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1673019547/I2C_slave.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1    -omf=coff -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp=${DFP_DIR}/xc16
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1673019547/I2C_slave.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
-${OBJECTDIR}/_ext/1673019547/pwm_generator.o: ../../current_files/libraries/pwm_generator.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/1673019547/encoder_interrupt.o: ../../current_files/libraries/encoder_interrupt.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/1673019547" 
-	@${RM} ${OBJECTDIR}/_ext/1673019547/pwm_generator.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1673019547/pwm_generator.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../current_files/libraries/pwm_generator.c  -o ${OBJECTDIR}/_ext/1673019547/pwm_generator.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1673019547/pwm_generator.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1    -omf=coff -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp=${DFP_DIR}/xc16
-	@${FIXDEPS} "${OBJECTDIR}/_ext/1673019547/pwm_generator.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	@${RM} ${OBJECTDIR}/_ext/1673019547/encoder_interrupt.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1673019547/encoder_interrupt.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../current_files/libraries/encoder_interrupt.c  -o ${OBJECTDIR}/_ext/1673019547/encoder_interrupt.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1673019547/encoder_interrupt.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1    -omf=coff -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp=${DFP_DIR}/xc16
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1673019547/encoder_interrupt.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
-else
+${OBJECTDIR}/_ext/1673019547/motor_pwm.o: ../../current_files/libraries/motor_pwm.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/1673019547" 
+	@${RM} ${OBJECTDIR}/_ext/1673019547/motor_pwm.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1673019547/motor_pwm.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../current_files/libraries/motor_pwm.c  -o ${OBJECTDIR}/_ext/1673019547/motor_pwm.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1673019547/motor_pwm.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1    -omf=coff -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp=${DFP_DIR}/xc16
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1673019547/motor_pwm.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
 ${OBJECTDIR}/_ext/725218671/main_slave.o: ../../current_files/main_slave.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/725218671" 
 	@${RM} ${OBJECTDIR}/_ext/725218671/main_slave.o.d 
 	@${RM} ${OBJECTDIR}/_ext/725218671/main_slave.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../current_files/main_slave.c  -o ${OBJECTDIR}/_ext/725218671/main_slave.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/725218671/main_slave.o.d"        -g -omf=coff -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp=${DFP_DIR}/xc16
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../current_files/main_slave.c  -o ${OBJECTDIR}/_ext/725218671/main_slave.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/725218671/main_slave.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1    -omf=coff -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp=${DFP_DIR}/xc16
 	@${FIXDEPS} "${OBJECTDIR}/_ext/725218671/main_slave.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
+else
 ${OBJECTDIR}/_ext/1673019547/I2C_slave.o: ../../current_files/libraries/I2C_slave.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/1673019547" 
 	@${RM} ${OBJECTDIR}/_ext/1673019547/I2C_slave.o.d 
@@ -131,12 +131,26 @@ ${OBJECTDIR}/_ext/1673019547/I2C_slave.o: ../../current_files/libraries/I2C_slav
 	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../current_files/libraries/I2C_slave.c  -o ${OBJECTDIR}/_ext/1673019547/I2C_slave.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1673019547/I2C_slave.o.d"        -g -omf=coff -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp=${DFP_DIR}/xc16
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1673019547/I2C_slave.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
-${OBJECTDIR}/_ext/1673019547/pwm_generator.o: ../../current_files/libraries/pwm_generator.c  nbproject/Makefile-${CND_CONF}.mk
+${OBJECTDIR}/_ext/1673019547/encoder_interrupt.o: ../../current_files/libraries/encoder_interrupt.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/1673019547" 
-	@${RM} ${OBJECTDIR}/_ext/1673019547/pwm_generator.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1673019547/pwm_generator.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../current_files/libraries/pwm_generator.c  -o ${OBJECTDIR}/_ext/1673019547/pwm_generator.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1673019547/pwm_generator.o.d"        -g -omf=coff -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp=${DFP_DIR}/xc16
-	@${FIXDEPS} "${OBJECTDIR}/_ext/1673019547/pwm_generator.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	@${RM} ${OBJECTDIR}/_ext/1673019547/encoder_interrupt.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1673019547/encoder_interrupt.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../current_files/libraries/encoder_interrupt.c  -o ${OBJECTDIR}/_ext/1673019547/encoder_interrupt.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1673019547/encoder_interrupt.o.d"        -g -omf=coff -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp=${DFP_DIR}/xc16
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1673019547/encoder_interrupt.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/_ext/1673019547/motor_pwm.o: ../../current_files/libraries/motor_pwm.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/1673019547" 
+	@${RM} ${OBJECTDIR}/_ext/1673019547/motor_pwm.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1673019547/motor_pwm.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../current_files/libraries/motor_pwm.c  -o ${OBJECTDIR}/_ext/1673019547/motor_pwm.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/1673019547/motor_pwm.o.d"        -g -omf=coff -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp=${DFP_DIR}/xc16
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1673019547/motor_pwm.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/_ext/725218671/main_slave.o: ../../current_files/main_slave.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/725218671" 
+	@${RM} ${OBJECTDIR}/_ext/725218671/main_slave.o.d 
+	@${RM} ${OBJECTDIR}/_ext/725218671/main_slave.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ../../current_files/main_slave.c  -o ${OBJECTDIR}/_ext/725218671/main_slave.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/_ext/725218671/main_slave.o.d"        -g -omf=coff -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp=${DFP_DIR}/xc16
+	@${FIXDEPS} "${OBJECTDIR}/_ext/725218671/main_slave.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 endif
 

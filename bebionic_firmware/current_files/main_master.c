@@ -18,32 +18,32 @@
 int task = 0;
 uint8_t addr = 10;
 
-void Interrupt1_Init( void )
+void Interrupt1_Init(void)
 {
-    RPINR0bits.INT1R = 5; // Define the pin number, according to RPx
-    INTCON2bits.INT1EP = 0; // External interrupt edge detect polarity
-    IEC1bits.INT1IE = 1; // 
-    IPC5bits.INT1IP = 1; 
+    _INT1R  = 5; // Set the RPx as external interrupt pin               - RP5
+    _INT1EP = 0; // negative/positive edge detect polarity              - POSITIVE
+    _INT1IE = 1; // enable/disable external interrupt                   - ENABLE
+    _INT1IP = 1; // 3-bit (0 to 7) interrupt priority config            - 001
 }
 
-void Interrupt2_Init( void )
+void Interrupt2_Init(void)
 {
-    RPINR1bits.INT2R = 5; // Define the pin number, according to RPx
-    INTCON2bits.INT2EP = 1; // External interrupt edge detect polarity
-    IEC1bits.INT2IE = 1; // 
-    IPC7bits.INT2IP = 1; 
+    _INT2R  = 5; // Set the RPx as external interrupt pin               - RP5
+    _INT2EP = 1; // negative/positive edge detect polarity              - NEGATIVE
+    _INT2IE = 1; // enable/disable external interrupt                   - ENABLE
+    _INT2IP = 1; // 3-bit (0 to 7) interrupt priority config            - 001
 }
 
-void __attribute__((interrupt, no_auto_psv)) _INT1Interrupt( void )               
+void __attribute__((interrupt, no_auto_psv)) _INT1Interrupt(void)               
 {   
     task = 1;
-    IFS1bits.INT1IF = 0;
+    _INT1IF = 0;
 }
 
-void __attribute__((interrupt, no_auto_psv)) _INT2Interrupt( void )               
+void __attribute__((interrupt, no_auto_psv)) _INT2Interrupt(void)               
 {   
     task = 2;
-    IFS1bits.INT2IF = 0;
+    _INT2IF = 0;
 }
 
 int main(void) {
@@ -68,9 +68,22 @@ int main(void) {
             i2c_Read();
             i2c_Nack();
             i2c_Stop();
-            
             task = 0;
-        } 
+        }
+        else if (task == 2){
+            i2c_Start();
+            i2c_Write(1, 0, addr);
+            i2c_Idle();
+            i2c_Write(0, 0, 50);
+            i2c_Idle();
+            i2c_Restart();
+            i2c_Write(1, 1, addr);
+            i2c_Idle();
+            i2c_Read();
+            i2c_Nack();
+            i2c_Stop();
+            task = 0;
+        }
     }
     return 0;
 }

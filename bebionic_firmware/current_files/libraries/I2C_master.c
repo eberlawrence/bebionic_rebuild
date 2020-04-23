@@ -8,7 +8,7 @@
 /* LIBRARIES */
 #include "I2C_master.h"
 
-void __attribute__((interrupt, auto_psv)) _MI2C1Interrupt(void)
+void __attribute__((interrupt, no_auto_psv)) _MI2C1Interrupt(void)
 {
     _MI2C1IF = 0;		
 }
@@ -48,7 +48,7 @@ void i2c_Init(uint32_t FSCL){
     _SI2C1IE = 0;   // enable/disable slave I2C interrupt event             - DISABLE
     
     I2C1STAT = 0x00;
-    I2C1BRG  = (((1 / FSCL) - delay) * FOSC) - 2; // define the SCL clock frequency (Master mode)
+    I2C1BRG  = (FOSC / FSCL) - 2; // define the SCL clock frequency (Master mode)
     _I2CEN   = 1;   // enable/disable I2C1                                  - DISABLE
 }
 

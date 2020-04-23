@@ -14,39 +14,12 @@
 
 #include "header.h"
 #include "libraries/I2C_slave.h"
-#include "libraries/pwm_generator.h"
+#include "libraries/motor_pwm.h"
+#include "libraries/encoder_interrupt.h"
 
-int pulse = 0;
-
-void Interrupt0_Init( void )
-{
-    _INT0EP = 0; // External interrupt edge detect polarity
-    _INT0IE = 1; // 
-    _INT0IP = 1; 
-}
-
-void __attribute__((interrupt, auto_psv)) _INT0Interrupt( void )               
-{
-    pulse++;
-    if (pulse == 500){
-        _RB2 = 1;
-    }
-    if (pulse == 1000){
-        _RB3 = 1;
-    }
-    if (pulse == 1500)
-    {
-        _RB2 = 0;
-        _RB3 = 0;
-        pulse = 0;
-    }
-    _INT0IF = 0;
-}
 
 int main(void) {
     
-    _TRISB2  = 0;
-    _TRISB3  = 0;
     _TRISB13 = 0;
     _RB13    = 1;
     
@@ -55,9 +28,16 @@ int main(void) {
     
     while(1){        
 
-        if (value == 100){
-            PWM(50, "forward");
+        if ((value == 100) & (!end) & (sense)){
+            motor_pwm_config(50, "forward");
             value = 0;
+        }
+        if ((value == 100) & (!end) & (!sense)){
+            motor_pwm_config(50, "backward");
+            value = 0;
+        }
+        else if (value == 50){
+            motor_pwm_config(0, "off");
         }
     }
     return 0;

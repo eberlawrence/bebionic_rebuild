@@ -1,7 +1,13 @@
+/* 
+ * File:   motor_pwm.c
+ * Author: Eber
+ *
+ * Created on 20 de Abril de 2020, 03:58
+ */
 
-#include "pwm_generator.h"
+#include "motor_pwm.h"
 
-void PWM(unsigned int speed, char direction[10]){
+void motor_pwm_config(unsigned int speed, char direction[10]){
     unsigned int x, y;
     _TRISB12 = 0;
     _TRISB14 = 0;
@@ -15,7 +21,12 @@ void PWM(unsigned int speed, char direction[10]){
     x = (100*speed)/50;
     y = (P1TPER / 100) * x;
 
-    if (strcmp(direction, "forward") == 0){
+    if (strcmp(direction, "off") == 0){
+        PWM1CON1 = 0x0000;
+        _RB12 = 0;
+        _RB14 = 0;
+    }
+    else if (strcmp(direction, "forward") == 0){
         PWM1CON1 = 0x0010;
         P1DC1 = y;
         _RB12 = 0;
@@ -26,7 +37,7 @@ void PWM(unsigned int speed, char direction[10]){
         P1DC2 = y;
         _RB14 = 0;
     }
-    else if (strcmp(direction, "stop") == 0){
+    else if (strcmp(direction, "break") == 0){
         PWM1CON1 = 0x0030;
         P1DC1 = y;
         P1DC2 = y;
