@@ -17,7 +17,13 @@ extern "C" {
 #define FCY (FOSC/2)
 #endif 
     
+#if defined(__dsPIC33FJ32MC202__)
 #include <p33FJ32MC202.h>
+#endif
+#if defined(__dsPIC33FJ32MC204__)
+#include <p33FJ32MC204.h>
+#endif  
+    
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
