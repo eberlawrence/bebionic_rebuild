@@ -105,7 +105,7 @@ void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void)
     timer_ms += 10;
     
     if (main_button){
-        if (timer_ms >= 2400){
+        if (timer_ms >= 6000){
             _TON = 0;
             timer_ms = 0;
         }
