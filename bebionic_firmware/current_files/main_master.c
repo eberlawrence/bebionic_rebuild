@@ -37,18 +37,18 @@ void Interrupt0_Init(void)
 
 void interrupt1_Init(void)
 {
-    _INT1R  = 24; // set the RPx as external interrupt pin               - RP24
-    _INT1EP = 0; // negative/positive edge detect polarity              - POSITIVE
-    _INT1IE = 1; // enable/disable external interrupt                   - ENABLE
-    _INT1IP = 2; // 3-bit (0 to 7) interrupt priority config            - 010
-}
-
-void interrupt2_Init(void)
-{
     _INT2R  = 5; // set the RPx as external interrupt pin               - RP5
     _INT2EP = 1; // negative/positive edge detect polarity              - NEGATIVE
     _INT2IE = 1; // enable/disable external interrupt                   - ENABLE
     _INT2IP = 2; // 3-bit (0 to 7) interrupt priority config            - 010
+}
+
+void interrupt2_Init(void)
+{
+    _INT1R  = 24; // set the RPx as external interrupt pin              - RP24
+    _INT1EP = 0; // negative/positive edge detect polarity              - POSITIVE
+    _INT1IE = 1; // enable/disable external interrupt                   - ENABLE
+    _INT1IP = 2; // 3-bit (0 to 7) interrupt priority config            - 010
 }
 
 void timer1_Init(void)
@@ -90,14 +90,14 @@ void __attribute__((interrupt, no_auto_psv)) _INT0Interrupt(void)
 
 void __attribute__((interrupt, no_auto_psv)) _INT1Interrupt(void)               
 {   
-    _TON = 1;    
-    _INT1IF = 0;
+    task = 2;
+    _INT2IF = 0;
 }
 
 void __attribute__((interrupt, no_auto_psv)) _INT2Interrupt(void)               
 {   
-    task = 2;
-    _INT2IF = 0;
+    _TON = 1;    
+    _INT1IF = 0;
 }
 
 void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void)
@@ -129,11 +129,21 @@ void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void)
 
 void main_init(void)
 {
-    _TRISB3  = 0;
-    _TRISB4  = 0;
-    _TRISB5  = 1;
-    _TRISB12 = 0;
-    _TRISC8  = 1; // set main button as input
+    _TRISA4  = 0; // OUTPUT - enable/disable finger motor supplay 
+    _TRISA7  = 0; // OUTPUT - enable/disable the motor driver A3906 (SLEEP flag)
+    
+    _TRISB3  = 0; // -----------------------
+    _TRISB5  = 1; // INPUT  - on/off flag that indicates overcurrent of the thumb motor (FL1/FL2)
+    _TRISB6  = 1; // INPUT  - receive pulses from thumb motor encoder (Channel A)
+    _TRISB7  = 1; // INPUT  - receive pulses from thumb motor encoder (Channel B) - Interrupt 0
+    _TRISB12 = 0; // OUTPUT - enable/disable PWM1H2 to drive the thumb motor (IN1/IN3)
+    _TRISB14 = 0; // OUTPUT - enable/disable PWM1H1 to drive the thumb motor (IN2/IN4)
+    
+    _TRISC3  = 0; // OUTPUT - enable/disable both encoder and microcontroler supply of fingers (ring & pinky)
+    _TRISC4  = 0; // OUTPUT - enable/disable both encoder and microcontroler supply of fingers (index & middle)
+    _TRISC6  = 0; // OUTPUT - enable/disable PWM2H1 to drive the vibrating motor to deliver feedback to the user
+    _TRISC7  = 0; // OUTPUT - enable/disable PWM2L1 to drive buzzer to deliver auditory feedback to the user
+    _TRISC8  = 1; // INPUT  - set main button (on/off - change prosthesis mode - etc)
     
     timer1_Init();
     interrupt1_Init();

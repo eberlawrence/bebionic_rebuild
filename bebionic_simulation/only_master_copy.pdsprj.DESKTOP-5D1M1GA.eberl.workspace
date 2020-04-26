@@ -1,15 +1,15 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <WORKSPACE>
  <FRAME activewindow="0">
-  <PLACEMENT>2c0000000200000003000000fffffffffffffffffffffffffffffffff8fffffff8ffffff86020000be010000</PLACEMENT>
+  <PLACEMENT>2c00000002000000010000000083ffff0083ffffffffffffffffffff000000002c0000008e0200000c020000</PLACEMENT>
   <WINDOW type="default" module="ISIS"/>
-  <WINDOW type="default" module="DXP"/>
+  <WINDOW type="default" module="VSMDEBUG"/>
  </FRAME>
  <MODULE name="VSMDEBUG">
   <PWI>
-   <POPUP w="400" x="4" flags="00000002" y="103" h="100" pid="0" iid="-1">
+   <POPUP w="705" x="4" flags="00008003" y="103" h="584" pid="0" iid="-1">
     <PROPERTIES>
-     <ITEM name="Message Column Width">144</ITEM>
+     <ITEM name="Message Column Width">449</ITEM>
      <ITEM name="ShowGrid">No</ITEM>
      <ITEM name="Source Column Width">100</ITEM>
      <ITEM name="Time Column Width">120</ITEM>
@@ -33,7 +33,7 @@
      <ITEM name="nItems">0</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="429" x="0" flags="00000022" y="452" h="299" pid="0" iid="3">
+   <POPUP w="429" x="862" flags="00000022" y="367" h="299" pid="0" iid="3">
     <PROPERTIES>
      <ITEM name="ComboBox1000">S</ITEM>
      <ITEM name="ComboBox1001">Sr</ITEM>
@@ -49,7 +49,7 @@
      <ITEM name="VSplitter1Pos">6</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="695" x="127" flags="00008001" y="113" h="453" pid="0" iid="2">
+   <POPUP w="695" x="720" flags="00000000" y="269" h="453" pid="0" iid="2">
     <PROPERTIES/>
    </POPUP>
    <POPUP w="1426" x="6" flags="0000002a" y="125" h="361" pid="1" iid="1">
@@ -416,7 +416,7 @@
      <ITEM name="TopLineAddress">00F80000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="8" x="197" flags="00000000" y="288" h="8" pid="11" iid="32">
+   <POPUP w="8" x="197" flags="00000002" y="288" h="8" pid="11" iid="32">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -426,7 +426,7 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="600" x="512" flags="0000002a" y="430" h="400" pid="1" iid="33">
+   <POPUP w="600" x="512" flags="0000002a" y="336" h="400" pid="1" iid="33">
     <PROPERTIES>
      <ITEM name="CaseSensitive">No</ITEM>
      <ITEM name="DISPADDRS">Yes</ITEM>
@@ -507,7 +507,7 @@
      <ITEM name="TopLineAddress">00F80000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="8" x="377" flags="00000000" y="468" h="8" pid="11" iid="33">
+   <POPUP w="8" x="377" flags="00000002" y="468" h="8" pid="11" iid="33">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
