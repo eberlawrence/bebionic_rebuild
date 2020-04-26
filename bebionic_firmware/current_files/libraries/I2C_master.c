@@ -119,3 +119,28 @@ uint8_t i2c_Read(void)
     while(!_RBF);
     return (I2C1RCV);
 }
+
+void send_command(uint8_t addr, uint8_t data ){
+    i2c_Start();
+    i2c_Write(1, 0, addr);
+    i2c_Idle();
+    i2c_Write(0, 0, data);
+    i2c_Idle();
+    i2c_Stop();
+}
+
+
+
+            
+ /*
+    i2c_Start();
+    i2c_Write(1, 0, addr);
+    i2c_Idle();
+    i2c_Write(0, 0, 100);
+    i2c_Idle();
+    i2c_Restart();
+    i2c_Write(1, 1, addr);
+    i2c_Idle();
+    i2c_Read();
+    i2c_Nack();
+    i2c_Stop();*/

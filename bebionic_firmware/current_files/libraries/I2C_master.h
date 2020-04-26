@@ -41,6 +41,7 @@ void i2c_Restart(void);
 void i2c_Stop(void);
 void i2c_Write(_Bool addr, int r_w, uint8_t data);
 uint8_t i2c_Read(void);
+void send_command(uint8_t addr, uint8_t data );
 
 #ifdef	__cplusplus
 }

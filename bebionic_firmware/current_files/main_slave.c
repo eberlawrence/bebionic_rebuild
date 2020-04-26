@@ -20,6 +20,8 @@
 
 int main(void) {
     
+    _TRISB6  = 1;
+    _TRISB7  = 1;
     _TRISB13 = 0;
     _RB13    = 1;
     
@@ -28,14 +30,17 @@ int main(void) {
     
     while(1){        
 
-        if ((value == 100) & (!end) & (sense)){
-            motor_pwm_config(50, "forward");
-            value = 0;
+        if (!end){
+            if ((value == 80)){
+                motor_pwm_config(50, "forward");
+                value = 0;
+            }
+            if ((value == 90)){
+                motor_pwm_config(50, "backward");
+                value = 0;
+            }
         }
-        if ((value == 100) & (!end) & (!sense)){
-            motor_pwm_config(50, "backward");
-            value = 0;
-        }
+
         else if (value == 50){
             motor_pwm_config(0, "off");
         }
