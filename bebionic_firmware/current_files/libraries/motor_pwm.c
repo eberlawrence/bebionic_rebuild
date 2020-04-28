@@ -47,3 +47,49 @@ void motor_pwm_config(unsigned int speed, char direction[10]){
     } 
     _PTEN = 1;
 }
+
+void vibracall_pwm(uint8_t duty, uint32_t freq, _Bool on){
+    unsigned int x, y;
+    _TRISC6 = 0;
+    _RC6 = 0;
+    P2TCON = 0x0002;
+    P2TMR = 0;
+    P2TPER = (FOSC / (4 * freq)) - 1; 
+    P2DTCON1 = 0x003B;
+    
+    x = (100 * duty) / 50;
+    y = (P2TPER / 100) * x;
+    
+    if (on){
+        PWM2CON1 = 0x0010;
+        P2DC1 = y;
+    }
+    else {
+        PWM1CON1 = 0x0000;
+        _RC6 = 0;
+    }
+    P2TCONbits.PTEN = 1;
+}
+
+void buzzer_pwm(uint8_t duty, uint32_t freq, _Bool on){
+    unsigned int x, y;
+    _TRISC7 = 0;
+    _RC7 = 0;
+    P2TCON = 0x0002;
+    P2TMR = 0;
+    P2TPER = (FOSC / (4 * freq)) - 1; 
+    P2DTCON1 = 0x003B;
+    
+    x = (100 * duty) / 50;
+    y = (P2TPER / 100) * x;
+    
+    if (on){
+        PWM2CON1 = 0x0001;
+        P2DC1 = y;
+    }
+    else {
+        PWM2CON1 = 0x0000;
+        _RC7 = 0;
+    }
+    P2TCONbits.PTEN = 1;
+}

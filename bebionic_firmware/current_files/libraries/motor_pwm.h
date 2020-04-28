@@ -32,6 +32,10 @@ extern "C" {
 
 void motor_pwm_config(unsigned int speed, char direction[10]);
 
+void vibracall_pwm(uint8_t duty, uint32_t freq, _Bool on);
+
+void buzzer_pwm(uint8_t duty, uint32_t freq, _Bool on);
+
 #ifdef	__cplusplus
 }
 #endif
