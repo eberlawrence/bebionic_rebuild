@@ -30,7 +30,7 @@ void Interrupt1_Init(void)
 
 void __attribute__((interrupt, no_auto_psv)) _INT0Interrupt(void)
 {
-    if (EA){
+    if (ENC_A){
         // forward
         limit = 0;
         pulse++;
@@ -40,7 +40,7 @@ void __attribute__((interrupt, no_auto_psv)) _INT0Interrupt(void)
             limit = 1;
         } 
     }
-    else if (!EA){
+    else if (!ENC_A){
         // backward
         limit = 0;
         pulse--;
@@ -49,7 +49,7 @@ void __attribute__((interrupt, no_auto_psv)) _INT0Interrupt(void)
             motor_pwm_config(0, "off");
             limit = 1;
         }
-    }         
+    } 
     _INT0IF = 0;
 }
 

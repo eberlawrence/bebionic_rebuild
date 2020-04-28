@@ -28,22 +28,17 @@ int main(void) {
     Interrupt0_Init();
     i2c_Init(ADDR);
     
-    while(1){        
+    while(1){       
 
-        if (!end){
-            if ((value == 80)){
-                motor_pwm_config(50, "forward");
-                value = 0;
-            }
-            if ((value == 90)){
-                motor_pwm_config(50, "backward");
-                value = 0;
-            }
+        if ((value == 80)){
+            motor_pwm_config(50, "forward");
+            value = 0;
+        }
+        if ((value == 90)){
+            motor_pwm_config(50, "backward");
+            value = 0;
         }
 
-        else if (value == 50){
-            motor_pwm_config(0, "off");
-        }
     }
     return 0;
 }

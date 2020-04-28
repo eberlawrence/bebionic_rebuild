@@ -24,6 +24,11 @@ extern "C" {
 #include <p33FJ32MC202.h>
 #endif   
     
+#define CH_A     _RB2
+#define CH_B     _RB3
+#define ENC_A    _RB6
+#define ENC_B    _RB7
+    
 extern uint16_t pulse;
 extern _Bool sense;
 extern _Bool end;

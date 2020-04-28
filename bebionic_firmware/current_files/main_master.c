@@ -22,10 +22,10 @@
 #define VIB_CALL _RC6
 #define BUZZER   _RC7
 
-#define index_addr 40
-#define middle_addr 50
-#define ring_addr 60
-#define pinky_addr 70
+#define index_addr 10
+#define middle_addr 20
+#define ring_addr 30
+#define pinky_addr 40
 
 #include "header.h"
 #include "libraries/I2C_master.h"
@@ -33,6 +33,7 @@
 
 int task = 0;
 uint8_t addr = 10;
+uint8_t grasp = 0;
 uint16_t timer1 = 0;
 uint16_t timer2 = 0;
 uint16_t pulse = 0;
@@ -40,105 +41,67 @@ uint16_t feedback = 0;
 _Bool limit = 0;
 _Bool repeated = 0;
 _Bool on = 0;
+_Bool thumb_pos = 0; // the thumb could be placed in two position, i.e. opposed ('1') and non-opposed ('0') to the fingers.
 
 
-/* Motor's encoder interruption - Initializer */
-void interrupt0_Init(void)
-{
-    _INT0EP = 1; // negative/positive edge detect polarity              - NEGATIVE
-    _INT0IE = 1; // enable/disable external interrupt                   - ENABLE
-    _INT0IP = 1; // 3-bit (0 to 7) interrupt priority config            - 001  
-}
 
-/* Movement interruption by HIGH level on channel A or B - Initializer */
-void interrupt1_Init(void)
-{
-    _INT1R  = 17; // set the RPx as external interrupt pin               - RP17
-    _INT1EP = 0;  // negative/positive edge detect polarity              - POSITIVE
-    _INT1IE = 1;  // enable/disable external interrupt                   - ENABLE
-    _INT1IP = 1;  // 3-bit (0 to 7) interrupt priority config            - 010
-}
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*
+ * FUNCTIONS
+ */
+////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/* Main button interruption - Initializer */
-void interrupt2_Init(void)
-{
-    _INT2R  = 24; // set the RPx as external interrupt pin              - RP24
-    _INT2EP = 1;  // negative/positive edge detect polarity             - NEGATIVE
-    _INT2IE = 1;  // enable/disable external interrupt                  - ENABLE
-    _INT2IP = 2;  // 3-bit (0 to 7) interrupt priority config           - 010
-}
 
-/* Timer1 interruption - Initializer */
-void timer1_Init(void)
-{
-    PR1             = 36850; // set the period of timer1                         - 10 ms
-    T1CONbits.TCKPS = 0;     // define prescaler (0=1:1, 1=1:8, 2=1:64, 3=1:256) - 1:1
-    _T1IE           = 1;     // eneble/disable timer1 interrupt                  - ENABLE
-    T1CONbits.TON   = 0;     // start/stop timer1                                - STOP
-}
-
-/* Timer2 interruption - Initializer */
-void timer2_Init(void)
-{
-    PR2             = 46062; // set the period of timer1                         - 100 ms
-    T2CONbits.TCKPS = 1;     // define prescaler (0=1:1, 1=1:8, 2=1:64, 3=1:256) - 1:8
-    _T2IE           = 1;     // eneble/disable timer1 interrupt                  - ENABLE
-    T2CONbits.TON   = 0;     // start/stop timer1                                - STOP
-}
-
-/* Do it when extern interruption 0 happens */
-void __attribute__((interrupt, no_auto_psv)) _INT0Interrupt(void)
-{
-    if (ENC_A){
-        // forward
-        limit = 0;
-        pulse++;
-        if (pulse == 500)
-        {
-            motor_pwm_config(0, "off");
-            limit = 1;
-        } 
+void power_grasp(){
+    if (!CH_A) {
+        _RB11 = 1;
+        send_command(index_addr, 80);
+        send_command(middle_addr, 80);
+        send_command(ring_addr, 80);
+        send_command(pinky_addr, 80);
+        motor_pwm_config(50, "forward");
     }
-    else if (!ENC_A){
-        // backward
-        limit = 0;
-        pulse--;
-        if (pulse == 0)
-        {
-            motor_pwm_config(0, "off");
-            limit = 1;
+    else if (CH_B) {
+        _RB11 = 0;
+        send_command(index_addr, 90);
+        send_command(middle_addr, 90);
+        send_command(ring_addr, 90);
+        send_command(pinky_addr, 90);
+        motor_pwm_config(50, "backward");
+    }
+
+}
+
+void tripod_grasp(_){
+    
+}
+
+void finger_point_grasp(){
+    
+}
+
+void key_grasp(){
+    
+}
+
+
+void grasp_selection(){
+    if (!MAG_SEN){
+        if (grasp == 0){
+            power_grasp();
         }
-    } 
-    _INT0IF = 0;
-}
-
-/* Do it when extern interruption 1 happens */
-void __attribute__((interrupt, no_auto_psv)) _INT1Interrupt(void)               
-{   
-    if (CH_A & CH_B){
-        motor_pwm_config(0, "off");
+        else {
+            tripod_grasp();
+        }        
     }
-    else if (CH_A){
-        
-    }
-    else if (CH_B){
-        if (repeated & limit){
-            
-            repeated = 0;
+    else {
+        if (grasp == 0){
+            finger_point_grasp();
         }
-        else{
-            
-            repeated = 1;
-        } 
+        else {
+            key_grasp();
+        }          
     }
-    _INT1IF = 0;
-}
-
-/* Do it when extern interruption 2 happens */
-void __attribute__((interrupt, no_auto_psv)) _INT2Interrupt(void)               
-{   
-    T1CONbits.TON = 1;
-    _INT2IF = 0;
 }
 
 void turn_on_feedback(void){        
@@ -189,20 +152,110 @@ void do_anotherthing_feedback(void){
         BUZZER = 0;
 }
 
+/* Motor's encoder interruption - Initializer */
+void interrupt0_Init(void)
+{
+    _INT0EP = 1; // negative/positive edge detect polarity              - NEGATIVE
+    _INT0IE = 1; // enable/disable external interrupt                   - ENABLE
+    _INT0IP = 1; // 3-bit (0 to 7) interrupt priority config            - 001  
+}
+
+/* Movement interruption by HIGH level on channel A or B - Initializer */
+void interrupt1_Init(void)
+{
+    _INT1R  = 17; // set the RPx as external interrupt pin               - RP17
+    _INT1EP = 1;  // negative/positive edge detect polarity              - NEGATIVE
+    _INT1IE = 1;  // enable/disable external interrupt                   - ENABLE
+    _INT1IP = 1;  // 3-bit (0 to 7) interrupt priority config            - 010
+}
+
+/* Main button interruption - Initializer */
+void interrupt2_Init(void)
+{
+    _INT2R  = 24; // set the RPx as external interrupt pin              - RP24
+    _INT2EP = 1;  // negative/positive edge detect polarity             - NEGATIVE
+    _INT2IE = 1;  // enable/disable external interrupt                  - ENABLE
+    _INT2IP = 2;  // 3-bit (0 to 7) interrupt priority config           - 010
+}
+
+/* Timer1 interruption - Initializer */
+void timer1_Init(void)
+{
+    PR1             = 36850; // set the period of timer1                         - 10 ms
+    T1CONbits.TCKPS = 0;     // define prescaler (0=1:1, 1=1:8, 2=1:64, 3=1:256) - 1:1
+    _T1IE           = 1;     // eneble/disable timer1 interrupt                  - ENABLE
+    T1CONbits.TON   = 0;     // start/stop timer1                                - STOP
+}
+
+/* Do it when extern interruption 0 happens */
+void __attribute__((interrupt, no_auto_psv)) _INT0Interrupt(void)
+{
+    if (ENC_A){
+        // forward
+        limit = 0;
+        pulse++;
+        if (pulse == 500)
+        {
+            motor_pwm_config(0, "off");
+            limit = 1;
+        } 
+    }
+    else if (!ENC_A){
+        // backward
+        limit = 0;
+        pulse--;
+        if (pulse == 0)
+        {
+            motor_pwm_config(0, "off");
+            limit = 1;
+        }
+    } 
+    _INT0IF = 0;
+}
+
+/* Do it when extern interruption 1 happens */
+void __attribute__((interrupt, no_auto_psv)) _INT1Interrupt(void)               
+{   
+    
+    if (!CH_A & !CH_B){
+        grasp_selection();
+        //motor_pwm_config(0, "off");
+    }
+    else if (!CH_A){
+        //_RB11 = 1;
+        grasp_selection();
+    }
+    else if (!CH_B){
+        if (repeated & limit){
+            grasp = abs(grasp - 1); // invert the grasp value
+            repeated = 0;
+        }
+        else{
+            _RB11 = 0;
+            grasp_selection();
+            repeated = 1;
+        } 
+    }
+    _INT1IF = 0;
+}
+
+/* Do it when extern interruption 2 happens */
+void __attribute__((interrupt, no_auto_psv)) _INT2Interrupt(void)               
+{   
+    T1CONbits.TON = 1;
+    _INT2IF = 0;
+}
 
 /* Do it when timer1 interruption happens */
 void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void)
 {    
-    if (!on){ // if the button is pressed and the prosthesis was off
-        
+    if (!on){ // if the button is pressed and the prosthesis was off        
         on = 1; // Turn the prosthesis on
         turn_on_feedback();
-        T1CONbits.TON = 0; // disable the timer
-        
+        T1CONbits.TON = 0; // disable the timer        
     }
         
-    else if (on){ // if the button is pressed and the prosthesis was on
-        
+    else if (on){ // if the button is pressed and the prosthesis was on        
         timer1 += 10;
         if (timer1 > 4000){
             on = 0; // Turn the prosthesis off
@@ -213,13 +266,15 @@ void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void)
     }
     
     if ((MAIN_BUT) & (timer1 != 0)) {
-        _RB11 = 1;
-        if (timer1 <= 800){
-            change_grasp_block_feedback();           
+        
+        if (timer1 <= 800){ // This will be used to change grasp block.
+            // insert function or flag to change the grasp block
+            change_grasp_block_feedback();        
             timer1 = 0;
             T1CONbits.TON = 0;
-            _RB11 = 0;
         }
+        
+        // This could be used to change configs, e.g. changing the kind of control of the prosthesis.
         else if ((timer1 > 800) & (timer1 <= 2000)){
             do_something_feedback(); 
             timer1 = 0;
@@ -233,14 +288,6 @@ void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void)
     }
     _T1IF = 0;
 }
-
-
-void __attribute__((interrupt, no_auto_psv)) _T2Interrupt(void)
-{
-    timer2 += 100;
-    _T2IF = 0;
-}
-
 
 /*  */
 void main_init(void)
@@ -271,12 +318,13 @@ void main_init(void)
     _TRISC8  = 1; // INPUT  - set main button (on/off - change prosthesis mode - etc)
     
     timer1_Init();
-    timer2_Init();
     interrupt0_Init();
     interrupt1_Init();
     interrupt2_Init();  
     i2c_Init(100000);
 }
+
+/*  */
 int main(void) {
     main_init();
     while(1){
@@ -290,10 +338,6 @@ int main(void) {
     }
     return 0;
 }
-
-
-
-
 
 /* All Bebionic Grasps
  * 

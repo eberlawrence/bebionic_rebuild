@@ -48,6 +48,9 @@ void motor_pwm_config(unsigned int speed, char direction[10]){
     _PTEN = 1;
 }
 
+
+#if defined(__dsPIC33FJ32MC204__)
+
 void vibracall_pwm(uint8_t duty, uint32_t freq, _Bool on){
     unsigned int x, y;
     _TRISC6 = 0;
@@ -93,3 +96,5 @@ void buzzer_pwm(uint8_t duty, uint32_t freq, _Bool on){
     }
     P2TCONbits.PTEN = 1;
 }
+
+#endif
