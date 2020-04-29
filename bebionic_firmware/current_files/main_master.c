@@ -53,8 +53,8 @@ _Bool thumb_pos = 0; // the thumb could be placed in two position, i.e. opposed 
 
 
 void power_grasp(){
-    if (!CH_A) {
-        _RB11 = 1;
+    if (CH_A) {
+        // _RB11 = 1;
         send_command(index_addr, 80);
         send_command(middle_addr, 80);
         send_command(ring_addr, 80);
@@ -62,7 +62,7 @@ void power_grasp(){
         motor_pwm_config(50, "forward");
     }
     else if (CH_B) {
-        _RB11 = 0;
+        //_RB11 = 0;
         send_command(index_addr, 90);
         send_command(middle_addr, 90);
         send_command(ring_addr, 90);
@@ -72,7 +72,7 @@ void power_grasp(){
 
 }
 
-void tripod_grasp(_){
+void tripod_grasp(){
     
 }
 
@@ -86,8 +86,9 @@ void key_grasp(){
 
 
 void grasp_selection(){
-    if (!MAG_SEN){
+    if (MAG_SEN){
         if (grasp == 0){
+            //_RB11 = 1;
             power_grasp();
         }
         else {
@@ -166,7 +167,7 @@ void interrupt1_Init(void)
     _INT1R  = 17; // set the RPx as external interrupt pin               - RP17
     _INT1EP = 1;  // negative/positive edge detect polarity              - NEGATIVE
     _INT1IE = 1;  // enable/disable external interrupt                   - ENABLE
-    _INT1IP = 1;  // 3-bit (0 to 7) interrupt priority config            - 010
+    _INT1IP = 2;  // 3-bit (0 to 7) interrupt priority config            - 010
 }
 
 /* Main button interruption - Initializer */
@@ -175,7 +176,7 @@ void interrupt2_Init(void)
     _INT2R  = 24; // set the RPx as external interrupt pin              - RP24
     _INT2EP = 1;  // negative/positive edge detect polarity             - NEGATIVE
     _INT2IE = 1;  // enable/disable external interrupt                  - ENABLE
-    _INT2IP = 2;  // 3-bit (0 to 7) interrupt priority config           - 010
+    _INT2IP = 1;  // 3-bit (0 to 7) interrupt priority config           - 010
 }
 
 /* Timer1 interruption - Initializer */
@@ -217,26 +218,27 @@ void __attribute__((interrupt, no_auto_psv)) _INT0Interrupt(void)
 void __attribute__((interrupt, no_auto_psv)) _INT1Interrupt(void)               
 {   
     
-    if (!CH_A & !CH_B){
-        grasp_selection();
-        //motor_pwm_config(0, "off");
+    if (CH_A & CH_B){        
+        motor_pwm_config(0, "off");
     }
-    else if (!CH_A){
-        //_RB11 = 1;
+    else if (CH_A){
+        _RB11 = 1;
         grasp_selection();
     }
-    else if (!CH_B){
+    else if (CH_B){
+        _RB11 = 1;
         if (repeated & limit){
             grasp = abs(grasp - 1); // invert the grasp value
             repeated = 0;
         }
         else{
-            _RB11 = 0;
             grasp_selection();
             repeated = 1;
         } 
     }
+    
     _INT1IF = 0;
+    //_RB11 = 0;
 }
 
 /* Do it when extern interruption 2 happens */
@@ -301,8 +303,8 @@ void main_init(void)
     
     /* Port B I/O config */
     _TRISB1  = 1; // INPUT  - magnetic sensor - if high (BLOCK A movements), if low (BLOCK B movements)
-    _TRISB2  = 1; // INPUT  - User's control signal - Channel A
-    _TRISB3  = 1; // INPUT  - User's control signal - Channel B
+    _TRISB2  = 1; // INPUT  - User's control signal - Channel A (* it was at I/O pin RB2, but the simulation didn't work there)
+    _TRISB3  = 1; // INPUT  - User's control signal - Channel B (* it was at I/O pin RB3, but the simulation didn't work there)
     _TRISB5  = 1; // INPUT  - on/off flag that indicates overcurrent of the thumb motor (FL1/FL2)
     _TRISB6  = 1; // INPUT  - receive pulses from thumb motor encoder (Channel A)
     _TRISB7  = 1; // INPUT  - receive pulses from thumb motor encoder (Channel B) - Interrupt 0
@@ -328,12 +330,16 @@ void main_init(void)
 int main(void) {
     main_init();
     while(1){
-        if (!CH_A){
-            motor_pwm_config(0, "off");
-        }
-        else if (!CH_A & !CH_B){
-            motor_pwm_config(0, "off");
-        }
+        if (CH_A)
+            _RB11 = 1;
+        else
+            _RB11 = 0;
+//        if (!CH_A){
+//            motor_pwm_config(0, "off");
+//        }
+//        else if (!CH_A & !CH_B){
+//            motor_pwm_config(0, "off");
+//        }
         
     }
     return 0;
