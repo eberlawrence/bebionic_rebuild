@@ -14,8 +14,8 @@
 
 #define MAIN_BUT _RC8
 #define MAG_SEN  _RB1
-#define CH_A     _RB2
-#define CH_B     _RB3
+#define CH_A     _RB10 // MUST BE _RB2
+#define CH_B     _RB11 // MUST BE _RB3
 #define ENC_A    _RB6
 #define ENC_B    _RB7
 
@@ -300,11 +300,12 @@ void main_init(void)
     /* Port A I/O config */
     _TRISA4  = 0; // OUTPUT - enable/disable finger motor supplay 
     _TRISA7  = 0; // OUTPUT - enable/disable the motor driver A3906 (SLEEP flag)
+    _TRISA9  = 0; // OUTPUT - enable/disable the SYNC flag that - When LOW, it reduces the power consumption (power-save mode)
     
     /* Port B I/O config */
-    _TRISB1  = 1; // INPUT  - magnetic sensor - if high (BLOCK A movements), if low (BLOCK B movements)
-    _TRISB2  = 1; // INPUT  - User's control signal - Channel A (* it was at I/O pin RB2, but the simulation didn't work there)
-    _TRISB3  = 1; // INPUT  - User's control signal - Channel B (* it was at I/O pin RB3, but the simulation didn't work there)
+    _TRISB1  = 1; // INPUT  - magnetic sensor - if high (Non-Opposed thumb position), if low (Opposed thumb position)
+    _TRISB10  = 1; // INPUT  - User's control signal - Channel A (* it was at I/O pin RB2, but the simulation didn't work there) ***MUST BE _RB2***
+    _TRISB11  = 1; // INPUT  - User's control signal - Channel B (* it was at I/O pin RB3, but the simulation didn't work there) ***MUST BE _RB3***
     _TRISB5  = 1; // INPUT  - on/off flag that indicates overcurrent of the thumb motor (FL1/FL2)
     _TRISB6  = 1; // INPUT  - receive pulses from thumb motor encoder (Channel A)
     _TRISB7  = 1; // INPUT  - receive pulses from thumb motor encoder (Channel B) - Interrupt 0
