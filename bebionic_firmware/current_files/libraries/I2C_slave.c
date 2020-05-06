@@ -26,13 +26,13 @@ void i2c_Init(uint8_t addr){
     _I2CEN   = 0;    // enable/disable I2C1                                  - DISABLE
  // _XXXX    = x;    // unimplemented bit. Read as '0                        - ~~
     _I2CSIDL = 0;    // discontinue/continue Idle mode                       - CONTINUE
-    _SCLREL  = 0;    // release/stretch SCL clock control (Slave mode)       - ~~
+    _SCLREL  = 1;    // release/stretch SCL clock control (Slave mode)       - ~~
     _IPMIEN  = 0;    // enable/disable IPMI support mode                     - DISABLE
     _A10M    = 0;    // 10-bit/7-bit slave address mode                      - 7-BIT
     _DISSLW  = 0;    // disable/enable slew rate control                     - ENABLE
     _SMEN    = 0;    // enable/disable SMBus I/O pin threshold               - DISABLE
     _GCEN    = 0;    // enable/disable general call address                  - DISABLE
-    _STREN   = 0;    // enable/disable SCL clock stetch (Slave mode)         - ~~
+    _STREN   = 1;    // enable/disable SCL clock stetch (Slave mode)         - ~~
     
     /* Hardware Clearable bits
     _ACKDT   = 0;    // NACK/ACK during an acknowledge   
@@ -50,7 +50,7 @@ void i2c_Init(uint8_t addr){
     _SI2C1IE = 1;    // enable/disable slave I2C interrupt event             - DISABLE
     
     _MI2C1IP = 0;    // 3-bit (0 to 7) master I2C interrupt priority config  - 000
-    _SI2C1IP = 2;    // 3-bit (0 to 7) slave I2C interrupt priority config   - 010
+    _SI2C1IP = 1;    // 3-bit (0 to 7) slave I2C interrupt priority config   - 010
     
     I2C1STAT = 0x00; // I2C status register 
     
