@@ -13,7 +13,7 @@
 #endif   
 
 #define MAIN_BUT _RC8
-#define MAG_SEN  _RB1
+#define MAG_SEN  _RB13 // MUST BE _RB1
 #define CH_A     _RB10 // MUST BE _RB2
 #define CH_B     _RB11 // MUST BE _RB3
 #define ENC_A    _RB6
@@ -54,7 +54,6 @@ _Bool thumb_pos = 0; // the thumb could be placed in two position, i.e. opposed 
 
 void power_grasp(){
     if (CH_A) {
-         _RB11 = 1;
         send_command(index_addr, 80);
         send_command(middle_addr, 80);
         send_command(ring_addr, 80);
@@ -62,28 +61,23 @@ void power_grasp(){
         motor_pwm_config(50, "forward");
     }
     else if (CH_B) {
-        //_RB11 = 0;
-        //send_command(index_addr, 90);
-        //send_command(middle_addr, 90);
-        //send_command(ring_addr, 90);
-        //send_command(pinky_addr, 90);
-        //motor_pwm_config(50, "backward");
+        send_command(index_addr, 90);
+        send_command(middle_addr, 90);
+        send_command(ring_addr, 90);
+        send_command(pinky_addr, 90);
+        motor_pwm_config(50, "backward");
     }
 
 }
-
 void tripod_grasp(){
     
 }
-
 void finger_point_grasp(){
     
 }
-
 void key_grasp(){
     
 }
-
 
 void grasp_selection(){
     if (MAG_SEN){
@@ -113,7 +107,6 @@ void turn_on_feedback(void){
         VIB_CALL = 0;
         BUZZER = 0;
 }
-
 void turn_off_feedback(void){        
         VIB_CALL = 1;
         __delay_ms(200);
@@ -123,13 +116,11 @@ void turn_off_feedback(void){
         __delay_ms(300);
         VIB_CALL = 0;
 }
-
 void change_grasp_block_feedback(void){        
         BUZZER = 1;
         __delay_ms(300);
         BUZZER = 0;
 }
-
 void do_something_feedback(void){        
         BUZZER = 1;
         __delay_ms(200);
@@ -139,7 +130,6 @@ void do_something_feedback(void){
         __delay_ms(200);
         BUZZER = 0;
 }
-
 void do_anotherthing_feedback(void){        
         BUZZER = 1;
         __delay_ms(100);
@@ -154,6 +144,7 @@ void do_anotherthing_feedback(void){
         BUZZER = 0;
 }
 
+
 /* Motor's encoder interruption - Initializer */
 void interrupt0_Init(void)
 {
@@ -161,7 +152,6 @@ void interrupt0_Init(void)
     _INT0IE = 1; // enable/disable external interrupt                   - ENABLE
     _INT0IP = 1; // 3-bit (0 to 7) interrupt priority config            - 001  
 }
-
 /* Movement interruption by HIGH level on channel A or B - Initializer */
 void interrupt1_Init(void)
 {
@@ -170,7 +160,6 @@ void interrupt1_Init(void)
     _INT1IE = 1;  // enable/disable external interrupt                   - ENABLE
     _INT1IP = 1;  // 3-bit (0 to 7) interrupt priority config            - 010
 }
-
 /* Main button interruption - Initializer */
 void interrupt2_Init(void)
 {
@@ -179,7 +168,6 @@ void interrupt2_Init(void)
     _INT2IE = 1;  // enable/disable external interrupt                  - ENABLE
     _INT2IP = 1;  // 3-bit (0 to 7) interrupt priority config           - 010
 }
-
 /* Timer1 interruption - Initializer */
 void timer1_Init(void)
 {
@@ -214,7 +202,6 @@ void __attribute__((interrupt, no_auto_psv)) _INT0Interrupt(void)
     } 
     _INT0IF = 0;
 }
-
 /* Do it when extern interruption 1 happens */
 void __attribute__((interrupt, no_auto_psv)) _INT1Interrupt(void)               
 {       
@@ -236,14 +223,12 @@ void __attribute__((interrupt, no_auto_psv)) _INT1Interrupt(void)
     }
     _INT1IF = 0;
 }
-
 /* Do it when extern interruption 2 happens */
 void __attribute__((interrupt, no_auto_psv)) _INT2Interrupt(void)               
 {   
     T1CONbits.TON = 1;
     _INT2IF = 0;
 }
-
 /* Do it when timer1 interruption happens */
 void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void)
 {    
@@ -252,6 +237,8 @@ void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void)
         turn_on_feedback();
         T1CONbits.TON = 0; // disable the timer  
         _RA4 = 1; // enable finger's motor supply
+        _RA7 = 1; // disable SLEEP MODE MOTOR DRIVER
+        _RA9 = 1; // disable POWER SAVE MODE
         _RC3 = 1; // enable finger's supply
         _RC4 = 1; // enable finger's supply
     }
@@ -264,6 +251,8 @@ void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void)
             timer1 = 0; // timer reset 
             T1CONbits.TON = 0; // disable the timer
             _RA4 = 0; // disable finger's motor supply
+            _RA7 = 0; // enable SLEEP MODE MOTOR DRIVER
+            _RA9 = 0; // enable POWER SAVE MODE
             _RC3 = 0; // disable finger's supply
             _RC4 = 0; // disable finger's supply
         }
@@ -293,6 +282,9 @@ void __attribute__((interrupt, no_auto_psv)) _T1Interrupt(void)
     _T1IF = 0;
 }
 
+
+
+
 /*  */
 void main_init(void)
 {
@@ -304,7 +296,7 @@ void main_init(void)
     _TRISA9  = 0; // OUTPUT - enable/disable the SYNC flag that - When LOW, it reduces the power consumption (power-save mode)
     
     /* Port B I/O config */
-    _TRISB1  = 1; // INPUT  - magnetic sensor - if high (Non-Opposed thumb position), if low (Opposed thumb position)
+    _TRISB13  = 1; // INPUT  - magnetic sensor - if high (Non-Opposed thumb position), if low (Opposed thumb position)           ***MUST BE _RB1***
     _TRISB10  = 1; // INPUT  - User's control signal - Channel A (* it was at I/O pin RB2, but the simulation didn't work there) ***MUST BE _RB2***
     _TRISB11  = 1; // INPUT  - User's control signal - Channel B (* it was at I/O pin RB3, but the simulation didn't work there) ***MUST BE _RB3***
     _TRISB5  = 1; // INPUT  - on/off flag that indicates overcurrent of the thumb motor (FL1/FL2)
@@ -332,12 +324,11 @@ void main_init(void)
 int main(void) {
     main_init();
     while(1){
-//        if (!CH_A){
-//            motor_pwm_config(0, "off");
-//        }
-//        else if (!CH_A & !CH_B){
-//            motor_pwm_config(0, "off");
-//        }
+        if (!CH_A & !CH_B){
+            _RB9 = 1;
+            motor_pwm_config(0, "off");
+            _RB9 = 0;
+        }
         
     }
     return 0;
