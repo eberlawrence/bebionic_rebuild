@@ -48,10 +48,10 @@
      <ITEM name="VSplitter1Pos">238</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="695" x="187" flags="00008001" y="179" h="453" pid="0" iid="2">
+   <POPUP w="695" x="9" flags="00000000" y="176" h="453" pid="0" iid="2">
     <PROPERTIES/>
    </POPUP>
-   <POPUP w="1426" x="6" flags="0000002a" y="125" h="361" pid="1" iid="1">
+   <POPUP w="1426" x="6" flags="0000002b" y="125" h="361" pid="1" iid="1">
     <PROPERTIES>
      <ITEM name="CaseSensitive">No</ITEM>
      <ITEM name="DISPADDRS">Yes</ITEM>
@@ -65,7 +65,7 @@
    <POPUP w="74" x="4" flags="00000008" y="103" h="12" pid="3" iid="1">
     <PROPERTIES/>
    </POPUP>
-   <POPUP w="1" x="4" flags="0000000a" y="103" h="4" pid="7" iid="1">
+   <POPUP w="1" x="4" flags="0000000a" y="103" h="2" pid="7" iid="1">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -75,7 +75,7 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="1" x="4" flags="0000000a" y="103" h="4" pid="4" iid="1">
+   <POPUP w="1" x="4" flags="0000000a" y="103" h="2" pid="4" iid="1">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -85,7 +85,7 @@
      <ITEM name="TopLineAddress">00000800</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="1" x="4" flags="0000000a" y="103" h="3" pid="5" iid="1">
+   <POPUP w="1" x="4" flags="0000000a" y="103" h="1" pid="5" iid="1">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -95,7 +95,7 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="1" x="4" flags="0000000a" y="103" h="3" pid="8" iid="1">
+   <POPUP w="1" x="4" flags="0000000a" y="103" h="1" pid="8" iid="1">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -105,7 +105,7 @@
      <ITEM name="TopLineAddress">008005C0</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="1" x="4" flags="0000000a" y="103" h="3" pid="9" iid="1">
+   <POPUP w="1" x="4" flags="0000000a" y="103" h="1" pid="9" iid="1">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -115,7 +115,7 @@
      <ITEM name="TopLineAddress">00F80000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="1" x="286" flags="00000002" y="348" h="10" pid="11" iid="1">
+   <POPUP w="8" x="286" flags="00000002" y="348" h="8" pid="11" iid="1">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -125,7 +125,7 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="1426" x="6" flags="0000002a" y="125" h="361" pid="1" iid="9">
+   <POPUP w="1426" x="6" flags="0000002b" y="125" h="361" pid="1" iid="9">
     <PROPERTIES>
      <ITEM name="CaseSensitive">No</ITEM>
      <ITEM name="DISPADDRS">Yes</ITEM>
@@ -156,7 +156,7 @@
    <POPUP w="74" x="4" flags="00000008" y="103" h="11" pid="3" iid="9">
     <PROPERTIES/>
    </POPUP>
-   <POPUP w="1" x="4" flags="0000000a" y="103" h="4" pid="7" iid="9">
+   <POPUP w="1" x="4" flags="0000000a" y="103" h="2" pid="7" iid="9">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -166,7 +166,7 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="1" x="4" flags="0000000a" y="103" h="4" pid="4" iid="9">
+   <POPUP w="1" x="4" flags="0000000a" y="103" h="2" pid="4" iid="9">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -176,7 +176,7 @@
      <ITEM name="TopLineAddress">00000800</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="1" x="4" flags="0000000a" y="103" h="3" pid="5" iid="9">
+   <POPUP w="1" x="4" flags="0000000a" y="103" h="1" pid="5" iid="9">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -186,7 +186,7 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="1" x="4" flags="0000000a" y="103" h="3" pid="8" iid="9">
+   <POPUP w="1" x="4" flags="0000000a" y="103" h="1" pid="8" iid="9">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -196,7 +196,7 @@
      <ITEM name="TopLineAddress">008005C0</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="1" x="4" flags="0000000a" y="103" h="3" pid="9" iid="9">
+   <POPUP w="1" x="4" flags="0000000a" y="103" h="1" pid="9" iid="9">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -206,7 +206,7 @@
      <ITEM name="TopLineAddress">00F80000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="1" x="466" flags="00000002" y="528" h="10" pid="11" iid="9">
+   <POPUP w="8" x="466" flags="00000002" y="528" h="8" pid="11" iid="9">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -216,7 +216,7 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="1426" x="6" flags="0000002a" y="125" h="361" pid="1" iid="10">
+   <POPUP w="1426" x="6" flags="0000002b" y="125" h="361" pid="1" iid="10">
     <PROPERTIES>
      <ITEM name="CaseSensitive">No</ITEM>
      <ITEM name="DISPADDRS">Yes</ITEM>
@@ -247,7 +247,7 @@
    <POPUP w="74" x="4" flags="00000008" y="103" h="11" pid="3" iid="10">
     <PROPERTIES/>
    </POPUP>
-   <POPUP w="1" x="4" flags="0000000a" y="103" h="4" pid="7" iid="10">
+   <POPUP w="1" x="4" flags="0000000a" y="103" h="2" pid="7" iid="10">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -257,7 +257,7 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="1" x="4" flags="0000000a" y="103" h="6" pid="4" iid="10">
+   <POPUP w="1" x="4" flags="0000000a" y="103" h="2" pid="4" iid="10">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -267,7 +267,7 @@
      <ITEM name="TopLineAddress">00000800</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="1" x="4" flags="0000000a" y="103" h="5" pid="5" iid="10">
+   <POPUP w="1" x="4" flags="0000000a" y="103" h="1" pid="5" iid="10">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -277,7 +277,7 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="1" x="4" flags="0000000a" y="103" h="5" pid="8" iid="10">
+   <POPUP w="1" x="4" flags="0000000a" y="103" h="1" pid="8" iid="10">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -287,7 +287,7 @@
      <ITEM name="TopLineAddress">008005C0</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="1" x="4" flags="0000000a" y="103" h="5" pid="9" iid="10">
+   <POPUP w="1" x="4" flags="0000000a" y="103" h="1" pid="9" iid="10">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -297,7 +297,7 @@
      <ITEM name="TopLineAddress">00F80000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="1" x="646" flags="00000002" y="708" h="12" pid="11" iid="10">
+   <POPUP w="8" x="646" flags="00000002" y="708" h="8" pid="11" iid="10">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -307,7 +307,7 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="1426" x="6" flags="0000002a" y="125" h="361" pid="1" iid="32">
+   <POPUP w="1426" x="6" flags="0000002b" y="125" h="361" pid="1" iid="32">
     <PROPERTIES>
      <ITEM name="CaseSensitive">No</ITEM>
      <ITEM name="DISPADDRS">Yes</ITEM>
@@ -318,7 +318,7 @@
      <ITEM name="nBreakpoints">0</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="300" x="0" flags="0000000b" y="0" h="100" pid="2" iid="32">
+   <POPUP w="300" x="0" flags="0000000a" y="0" h="100" pid="2" iid="32">
     <PROPERTIES>
      <ITEM name="Address Column Width">99</ITEM>
      <ITEM name="AutoResize">No</ITEM>
@@ -338,7 +338,7 @@
    <POPUP w="74" x="4" flags="00000008" y="103" h="11" pid="3" iid="32">
     <PROPERTIES/>
    </POPUP>
-   <POPUP w="1" x="4" flags="0000000a" y="103" h="6" pid="7" iid="32">
+   <POPUP w="1" x="4" flags="0000000a" y="103" h="2" pid="7" iid="32">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -348,7 +348,7 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="1" x="4" flags="0000000a" y="103" h="6" pid="4" iid="32">
+   <POPUP w="1" x="4" flags="0000000a" y="103" h="2" pid="4" iid="32">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -358,7 +358,7 @@
      <ITEM name="TopLineAddress">00000800</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="1" x="4" flags="0000000a" y="103" h="5" pid="5" iid="32">
+   <POPUP w="1" x="4" flags="0000000a" y="103" h="1" pid="5" iid="32">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -368,7 +368,7 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="1" x="4" flags="0000000a" y="103" h="5" pid="8" iid="32">
+   <POPUP w="1" x="4" flags="0000000a" y="103" h="1" pid="8" iid="32">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -378,7 +378,7 @@
      <ITEM name="TopLineAddress">008005C0</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="1" x="4" flags="0000000a" y="103" h="5" pid="9" iid="32">
+   <POPUP w="1" x="4" flags="0000000a" y="103" h="1" pid="9" iid="32">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -388,7 +388,7 @@
      <ITEM name="TopLineAddress">00F80000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="1" x="826" flags="00000002" y="724" h="12" pid="11" iid="32">
+   <POPUP w="8" x="826" flags="00000002" y="728" h="8" pid="11" iid="32">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -409,7 +409,7 @@
      <ITEM name="nBreakpoints">0</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="300" x="0" flags="0000000a" y="0" h="170" pid="2" iid="33">
+   <POPUP w="300" x="0" flags="0000000a" y="0" h="100" pid="2" iid="33">
     <PROPERTIES>
      <ITEM name="Address Column Width">99</ITEM>
      <ITEM name="AutoResize">No</ITEM>
@@ -429,7 +429,7 @@
    <POPUP w="74" x="4" flags="00000008" y="103" h="11" pid="3" iid="33">
     <PROPERTIES/>
    </POPUP>
-   <POPUP w="1" x="4" flags="0000000a" y="103" h="6" pid="7" iid="33">
+   <POPUP w="1" x="4" flags="0000000a" y="103" h="2" pid="7" iid="33">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -439,7 +439,7 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="1" x="4" flags="0000000a" y="103" h="6" pid="4" iid="33">
+   <POPUP w="1" x="4" flags="0000000a" y="103" h="2" pid="4" iid="33">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -449,7 +449,7 @@
      <ITEM name="TopLineAddress">00000800</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="1" x="4" flags="0000000a" y="103" h="5" pid="5" iid="33">
+   <POPUP w="1" x="4" flags="0000000a" y="103" h="1" pid="5" iid="33">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -459,7 +459,7 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="1" x="4" flags="0000000a" y="103" h="5" pid="8" iid="33">
+   <POPUP w="1" x="4" flags="0000000a" y="103" h="1" pid="8" iid="33">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -469,7 +469,7 @@
      <ITEM name="TopLineAddress">008005C0</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="1" x="4" flags="0000000a" y="103" h="5" pid="9" iid="33">
+   <POPUP w="1" x="4" flags="0000000a" y="103" h="1" pid="9" iid="33">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -479,7 +479,7 @@
      <ITEM name="TopLineAddress">00F80000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="1" x="1006" flags="00000002" y="724" h="12" pid="11" iid="33">
+   <POPUP w="8" x="1006" flags="00000002" y="728" h="8" pid="11" iid="33">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>
@@ -488,6 +488,12 @@
      <ITEM name="ShowToolTips">Yes</ITEM>
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
+   </POPUP>
+   <POPUP w="695" x="405" flags="00000000" y="244" h="453" pid="0" iid="130">
+    <PROPERTIES/>
+   </POPUP>
+   <POPUP w="695" x="66" flags="00008001" y="128" h="453" pid="0" iid="124">
+    <PROPERTIES/>
    </POPUP>
   </PWI>
  </MODULE>

@@ -42,7 +42,7 @@ _Bool limit = 0;
 _Bool repeated = 0;
 _Bool on = 0;
 _Bool thumb_pos = 0; // the thumb could be placed in two position, i.e. opposed ('1') and non-opposed ('0') to the fingers.
-
+_Bool stop_mov = 0;
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -204,7 +204,7 @@ void __attribute__((interrupt, no_auto_psv)) _INT0Interrupt(void)
 }
 /* Do it when extern interruption 1 happens */
 void __attribute__((interrupt, no_auto_psv)) _INT1Interrupt(void)               
-{       
+{           
     if (CH_A & CH_B){        
         motor_pwm_config(0, "off");
     }
@@ -221,6 +221,7 @@ void __attribute__((interrupt, no_auto_psv)) _INT1Interrupt(void)
             repeated = 1;
         } 
     }
+    stop_mov = 1;
     _INT1IF = 0;
 }
 /* Do it when extern interruption 2 happens */
@@ -324,11 +325,12 @@ void main_init(void)
 int main(void) {
     main_init();
     while(1){
-        if (!CH_A & !CH_B){
-            _RB9 = 1;
-            motor_pwm_config(0, "off");
-            _RB9 = 0;
-        }
+//        if (!CH_A & !CH_B & stop_mov){
+//            _RB9 = 1;
+//            motor_pwm_config(0, "off");
+//            _RB9 = 0;
+//            stop_mov = 0;
+//        }
         
     }
     return 0;
